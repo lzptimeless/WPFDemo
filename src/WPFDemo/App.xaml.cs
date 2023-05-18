@@ -31,7 +31,7 @@ namespace WPFDemo
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (!this.GetSingleInstanceFeature().OnStartup())
+            if (!this.GetSingleInstanceFeature().OnStartup(e))
             {
                 Shutdown();
                 return;

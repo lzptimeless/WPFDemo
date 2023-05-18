@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WPFDemo": {
+      "commandName": "Project",
+      "commandLineArgs": "--test"
+    }
+  }
+}

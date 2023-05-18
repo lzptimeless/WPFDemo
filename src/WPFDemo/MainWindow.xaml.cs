@@ -30,18 +30,14 @@ namespace WPFDemo
             systrayFeature.OpenClick += SystrayFeature_OpenClick;
             systrayFeature.ExitClick += SystrayFeature_ExitClick;
 
+            Application.Current.GetSingleInstanceFeature().ShowWindow += SingleInstance_ShowWindow;
+
             Loaded += MainWindow_Loaded;
         }
 
         private void SystrayFeature_OpenClick(object? sender, EventArgs e)
         {
-            if (WindowState == WindowState.Minimized)
-                WindowState = WindowState.Normal;
-
-            if (Visibility != Visibility.Visible)
-                Show();
-
-            Activate();
+            Restore();
         }
 
         private void SystrayFeature_ExitClick(object? sender, EventArgs e)
@@ -49,13 +45,18 @@ namespace WPFDemo
             Close();
         }
 
+        private void SingleInstance_ShowWindow(object? sender, WPFFeatures.SingleInstance.ShowWindowArgs e)
+        {
+            Restore();
+        }
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Application.Current.GetSingleInstanceFeature()?.OnMainWindowLoaded(this);
-            Application.Current.GetSystrayFeature()?.OnMainWindowLoaded();
-
             HwndSource hwnd = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
             hwnd.AddHook(new HwndSourceHook(HandleWindowMessages));
+
+            Application.Current.GetSingleInstanceFeature()?.OnMainWindowLoaded(hwnd.Handle);
+            Application.Current.GetSystrayFeature()?.OnMainWindowLoaded();
         }
 
         private IntPtr HandleWindowMessages(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -71,6 +72,17 @@ namespace WPFDemo
             Application.Current.GetSystrayFeature()?.Dispose();
 
             base.OnClosed(e);
+        }
+
+        private void Restore()
+        {
+            if (WindowState == WindowState.Minimized)
+                WindowState = WindowState.Normal;
+
+            if (Visibility != Visibility.Visible)
+                Show();
+
+            Activate();
         }
     }
 }
