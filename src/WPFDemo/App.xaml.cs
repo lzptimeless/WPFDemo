@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using WPFFeatures.Admin;
+using WPFFeatures.CustomUrl;
 using WPFFeatures.SingleInstance;
 using WPFFeatures.Systray;
 
@@ -20,6 +21,7 @@ namespace WPFDemo
         internal SingleInstanceFeature SingleInstanceFeature { get; }
         internal AdminFeature AdminFeature { get; }
         internal SystrayFeature SystrayFeature { get; }
+        internal CustomUrlFeature CustomUrlFeature { get; }
         #endregion
 
         public App()
@@ -27,6 +29,7 @@ namespace WPFDemo
             SingleInstanceFeature = new SingleInstanceFeature();
             AdminFeature = new AdminFeature();
             SystrayFeature = new SystrayFeature();
+            CustomUrlFeature = new CustomUrlFeature();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -42,6 +45,8 @@ namespace WPFDemo
                 Shutdown();
                 return;
             }
+
+            this.GetCustomUrlFeature().TryRegisterUriScheme();
 
             base.OnStartup(e);
         }
@@ -69,6 +74,11 @@ namespace WPFDemo
         internal static SystrayFeature GetSystrayFeature(this Application app)
         {
             return ((App)app).SystrayFeature;
+        }
+
+        internal static CustomUrlFeature GetCustomUrlFeature(this Application app)
+        {
+            return ((App)app).CustomUrlFeature;
         }
     }
 }

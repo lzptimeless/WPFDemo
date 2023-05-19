@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 	<UseWindowsForms>true</UseWindowsForms>
+	<ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="AppIcon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="TaskScheduler" Version="2.10.1" />
