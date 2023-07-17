@@ -27,10 +27,17 @@ namespace WPFDemo
             InitializeComponent();
 
             var systrayFeature = Application.Current.GetSystrayFeature();
-            systrayFeature.OpenClick += SystrayFeature_OpenClick;
-            systrayFeature.ExitClick += SystrayFeature_ExitClick;
+            if (systrayFeature != null)
+            {
+                systrayFeature.OpenClick += SystrayFeature_OpenClick;
+                systrayFeature.ExitClick += SystrayFeature_ExitClick;
+            }
 
-            Application.Current.GetSingleInstanceFeature().ShowWindow += SingleInstance_ShowWindow;
+            var singleInstanceFeature = Application.Current.GetSingleInstanceFeature();
+            if (singleInstanceFeature != null)
+            {
+                singleInstanceFeature.ShowWindow += SingleInstance_ShowWindow;
+            }
 
             Loaded += MainWindow_Loaded;
         }

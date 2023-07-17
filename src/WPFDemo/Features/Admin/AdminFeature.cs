@@ -34,6 +34,10 @@ namespace WPFFeatures.Admin
         /// 计划任务描述
         /// </summary>
         private readonly string _taskDescription;
+        /// <summary>
+        /// 缓存ElevationHelper.GetWindowsIdInfo的结果
+        /// </summary>
+        private WindowsIdInfo? _windowsIdInfo;
         #endregion
 
         /// <summary>
@@ -60,21 +64,17 @@ namespace WPFFeatures.Admin
 
         #region public methods
         /// <summary>
-        /// 在Application.OnStartup中调用
+        /// 检测是否拥有admin权限，应该在Application.OnStartup中调用
         /// </summary>
-        /// <param name="e">Application.OnStartup的参数</param>
-        /// <param name="beforeStartNewInstanceAction">在发现当前进程没有高级权限后，启动新的高级权限实例之前触发的回调函数</param>
-        /// <returns>true：当前实例拥有高级权限，false：当前实例没有高级权限，已经自动启动了一个新的高级权限实例，本实例需要退出</returns>
-        public bool OnStartup(StartupEventArgs e, Action? beforeStartNewInstanceAction = null)
+        /// <returns>true：当前实例拥有高级权限，false：当前实例没有高级权限</returns>
+        public bool CheckPrivilege()
         {
-            var windowsIdInfo = ElevationHelper.GetWindowsIdInfo(); // 获取本进程权限
-            var skipUacSchTaskName2 = $"{_skipUacSchTaskName}_{windowsIdInfo.UserName.Trim().ToLowerInvariant()}";
+            var windowsIdInfo = GetWindowsIdInfo(); // 获取本进程权限
+            var skipUacSchTaskNameWithUser = GetSkipUACTaskNameWithUser();
 
             if (!windowsIdInfo.IsElevated || windowsIdInfo.IsSystemUser)
             {
-                // 没有 Admin 权限，或上下文账号不对（不能用System），重启
-                beforeStartNewInstanceAction?.Invoke();
-                LaunchNewInstanceWithAdmin(skipUacSchTaskName2, windowsIdInfo, _launcherPath, e.Args);
+                // 没有 Admin 权限，或上下文账号不对（不能用System），外部应该在接受到false之后调用LaunchNewInstanceWithAdmin
                 return false;
             }
 
@@ -83,31 +83,30 @@ namespace WPFFeatures.Admin
             {
                 try
                 {
-                    AddSkipUACTaskIfNeed(skipUacSchTaskName2, windowsIdInfo, _launcherPath);
+                    AddSkipUACTaskIfNeed(skipUacSchTaskNameWithUser, windowsIdInfo, _launcherPath);
                 }
                 catch { }
             });
 
             return true;
         }
-        #endregion
 
-        #region private methods
         /// <summary>
         /// 通过 Admin 权限启动新的程序实例
         /// </summary>
-        /// <param name="windowsIdInfo">进行用户信息</param>
-        /// <param name="launcherPath">程序启动路径</param>
-        /// <param name="launchArgs">重启程序时的启动参数</param>
-        private void LaunchNewInstanceWithAdmin(string taskName, WindowsIdInfo windowsIdInfo, string launcherPath, string[] launchArgs)
+        /// <param name="e">Application.OnStartup的参数</param>
+        public void LaunchNewInstanceWithAdmin(StartupEventArgs e)
         {
+            var windowsIdInfo = GetWindowsIdInfo();
+            var skipUacSchTaskNameWithUser = GetSkipUACTaskNameWithUser();
+
             if (windowsIdInfo.IsElevated && !windowsIdInfo.IsSystemUser)
             {
                 // 本程序已经拥有 admin 权限，直接启动新实例
                 var psi = new ProcessStartInfo
                 {
-                    FileName = launcherPath,
-                    Arguments = LaunchParameters.CombineArgs(launchArgs)
+                    FileName = _launcherPath,
+                    Arguments = LaunchParameters.CombineArgs(e.Args)
                 };
                 try
                 {
@@ -118,7 +117,7 @@ namespace WPFFeatures.Admin
             }
 
             // 尝试通过计划任务跳过UAC启动程序以获得 admin 权限
-            bool isSkipUACSuccess = LaunchUseTaskSch(taskName, windowsIdInfo, launcherPath, launchArgs);
+            bool isSkipUACSuccess = LaunchUseTaskSch(skipUacSchTaskNameWithUser, windowsIdInfo, _launcherPath, e.Args);
             if (!isSkipUACSuccess)
             {
                 if (!windowsIdInfo.IsSystemUser)
@@ -127,8 +126,8 @@ namespace WPFFeatures.Admin
                     // 使用备用方式启动程序以获得 admin 权限
                     ProcessStartInfo psi = new ProcessStartInfo
                     {
-                        FileName = launcherPath,
-                        Arguments = LaunchParameters.CombineArgs(launchArgs, LaunchParameters.RunAs),// 加上 -runas 参数，以便下次启动判断启动的原因
+                        FileName = _launcherPath,
+                        Arguments = LaunchParameters.CombineArgs(e.Args, LaunchParameters.RunAs),// 加上 -runas 参数，以便下次启动判断启动的原因
                         UseShellExecute = true, // 必须显示声明，不然在 .net core app 中为 false，runas 需要 UseShellExecute = true
                         Verb = "runas" // runas代表要向用户请求admin权限
                     };
@@ -145,20 +144,22 @@ namespace WPFFeatures.Admin
                     // 来启动新的有admin权限的实例
                     try
                     {
-                        LaunchHelper.LaunchAsUserUnstable(launcherPath, LaunchParameters.CombineArgs(launchArgs));
+                        LaunchHelper.LaunchAsUserUnstable(_launcherPath, LaunchParameters.CombineArgs(e.Args));
                     }
                     catch
                     {
                         try
                         {
-                            LaunchHelper.LaunchAsUser(launcherPath, LaunchParameters.CombineArgs(launchArgs));
+                            LaunchHelper.LaunchAsUser(_launcherPath, LaunchParameters.CombineArgs(e.Args));
                         }
                         catch { }
                     }
                 }
             }// if (!isSkipUACSuccess)
         }
+        #endregion
 
+        #region private methods
         /// <summary>
         /// 用跳过UAC的计划任务启动新实例，成功返回ture，失败返回false
         /// </summary>
@@ -200,6 +201,19 @@ namespace WPFFeatures.Admin
             }
         }
 
+        private string GetSkipUACTaskNameWithUser()
+        {
+            var windowsIdInfo = GetWindowsIdInfo();
+            return $"{_skipUacSchTaskName}_{windowsIdInfo.UserName.Trim().ToLowerInvariant()}";
+        }
+
+        private WindowsIdInfo GetWindowsIdInfo()
+        {
+            if (_windowsIdInfo == null)
+                _windowsIdInfo = ElevationHelper.GetWindowsIdInfo();
+
+            return _windowsIdInfo;
+        }
         #endregion
     }
 }

@@ -107,57 +107,49 @@ namespace WPFFeatures.SingleInstance
 
         #region public methods
         /// <summary>
-        /// 在Application.OnStartup中调用
+        /// 在系统范围注册单实例Mutex，应该在Application.OnStartup中调用
         /// </summary>
-        /// <param name="e">程序启动参数</param>
         /// <returns>true：当前实例为单实例，false：已经存在一个实例，本实例需要退出</returns>
-        public bool OnStartup(StartupEventArgs e)
+        public bool Register()
         {
-            if (!CreateSingleInstanceMutex())
-            {
-                // 本次启动属于重复启动，直接退出
-                // 通知已经存在的实例打开窗口，注意这个操作需要发送窗口消息给已经存在的实例
-                uint lParam = MSG_SHOW_LPARAM_EMPTY;
-                if (e.Args.Length > 0)
-                {
-                    // Try to set process startup args
-                    string args = string.Join(' ', e.Args);
-                    try
-                    {
-                        Clipboard.SetData(_msgClipboardFormatName, args);
-                        if ((string)Clipboard.GetData(_msgClipboardFormatName) == args)
-                            lParam = MSG_SHOW_LPARAM_CLIPBOARD;
-                    }
-                    catch { }
-
-                    if (lParam == MSG_SHOW_LPARAM_EMPTY)
-                    {
-                        // Set clipboard failed, use tmp file mode
-                        try
-                        {
-                            string filePath = Path.Combine(Path.GetTempPath(), _msgTempFileName);
-                            File.WriteAllText(filePath, args);
-                            lParam = MSG_SHOW_LPARAM_TMP_FILE;
-                        }
-                        catch { }
-                    }
-                }
-
-                PostMessage(new IntPtr(HWND_BROADCAST), GetMsgShow(), IntPtr.Zero, new IntPtr(lParam));
-
-                return false;
-            }
-
-            return true;
+            return CreateSingleInstanceMutex();
         }
 
         /// <summary>
-        /// 在Application.OnExit中调用
+        /// 激活已经存在的实例
         /// </summary>
-        public void OnExit()
+        /// <param name="e">程序启动参数</param>
+        public void Active(StartupEventArgs e)
         {
-            // 释放_singleInstanceMutex
-            ReleaseSingleInstanceMutex();
+            // 本次启动属于重复启动，直接退出
+            // 通知已经存在的实例打开窗口，注意这个操作需要发送窗口消息给已经存在的实例
+            uint lParam = MSG_SHOW_LPARAM_EMPTY;
+            if (e.Args.Length > 0)
+            {
+                // Try to set process startup args
+                string args = string.Join(' ', e.Args);
+                try
+                {
+                    Clipboard.SetData(_msgClipboardFormatName, args);
+                    if ((string)Clipboard.GetData(_msgClipboardFormatName) == args)
+                        lParam = MSG_SHOW_LPARAM_CLIPBOARD;
+                }
+                catch { }
+
+                if (lParam == MSG_SHOW_LPARAM_EMPTY)
+                {
+                    // Set clipboard failed, use tmp file mode
+                    try
+                    {
+                        string filePath = Path.Combine(Path.GetTempPath(), _msgTempFileName);
+                        File.WriteAllText(filePath, args);
+                        lParam = MSG_SHOW_LPARAM_TMP_FILE;
+                    }
+                    catch { }
+                }
+            }
+
+            PostMessage(new IntPtr(HWND_BROADCAST), GetMsgShow(), IntPtr.Zero, new IntPtr(lParam));
         }
 
         /// <summary>

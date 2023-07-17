@@ -18,10 +18,10 @@ namespace WPFDemo
     public partial class App : Application
     {
         #region properties
-        internal SingleInstanceFeature SingleInstanceFeature { get; }
-        internal AdminFeature AdminFeature { get; }
-        internal SystrayFeature SystrayFeature { get; }
-        internal CustomUrlFeature CustomUrlFeature { get; }
+        internal SingleInstanceFeature? SingleInstanceFeature { get; }
+        internal AdminFeature? AdminFeature { get; }
+        internal SystrayFeature? SystrayFeature { get; }
+        internal CustomUrlFeature? CustomUrlFeature { get; }
         #endregion
 
         public App()
@@ -34,26 +34,30 @@ namespace WPFDemo
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (!this.GetSingleInstanceFeature().OnStartup(e))
+            if (this.GetSingleInstanceFeature()?.Register() == false)
             {
+                this.GetSingleInstanceFeature()?.Active(e);
                 Shutdown();
                 return;
             }
 
-            if (!this.GetAdminFeature().OnStartup(e, () => this.GetSingleInstanceFeature().Dispose()))
+            if (this.GetAdminFeature()?.CheckPrivilege() == false)
             {
+                // 没有admin权限，尝试重启
+                this.GetSingleInstanceFeature()?.Dispose();
+                this.GetAdminFeature()?.LaunchNewInstanceWithAdmin(e);
                 Shutdown();
                 return;
             }
 
-            this.GetCustomUrlFeature().TryRegisterUriScheme();
+            this.GetCustomUrlFeature()?.TryRegisterUriScheme();
 
             base.OnStartup(e);
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            this.GetSingleInstanceFeature().OnExit();
+            this.GetSingleInstanceFeature()?.Dispose();
 
             base.OnExit(e);
         }
@@ -61,22 +65,22 @@ namespace WPFDemo
 
     public static class ApplicationExtension
     {
-        internal static SingleInstanceFeature GetSingleInstanceFeature(this Application app)
+        internal static SingleInstanceFeature? GetSingleInstanceFeature(this Application app)
         {
             return ((App)app).SingleInstanceFeature;
         }
 
-        internal static AdminFeature GetAdminFeature(this Application app)
+        internal static AdminFeature? GetAdminFeature(this Application app)
         {
             return ((App)app).AdminFeature;
         }
 
-        internal static SystrayFeature GetSystrayFeature(this Application app)
+        internal static SystrayFeature? GetSystrayFeature(this Application app)
         {
             return ((App)app).SystrayFeature;
         }
 
-        internal static CustomUrlFeature GetCustomUrlFeature(this Application app)
+        internal static CustomUrlFeature? GetCustomUrlFeature(this Application app)
         {
             return ((App)app).CustomUrlFeature;
         }
