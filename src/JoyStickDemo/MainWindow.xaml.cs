@@ -35,6 +35,7 @@ namespace JoyStickDemo
             InitializeComponent();
 
             Loaded += MainWindow_Loaded;
+            Unloaded += MainWindow_Unloaded;
             Gamepad.GamepadAdded += Gamepad_GamepadAdded;
             Gamepad.GamepadRemoved += Gamepad_GamepadRemoved;
         }
@@ -43,6 +44,11 @@ namespace JoyStickDemo
         {
             GetGamepads();
             _gamepadReadTimer = new Timer(GamepadReadTimerCallback, null, 0, 100);
+        }
+
+        private void MainWindow_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _gamepadReadTimer?.Dispose();
         }
 
         private void Read_Click(object sender, RoutedEventArgs e)
