@@ -45,24 +45,34 @@ namespace JoyStickDemo
             _gamepadReadTimer = new Timer(GamepadReadTimerCallback, null, 0, 100);
         }
 
+        private void Read_Click(object sender, RoutedEventArgs e)
+        {
+            GamepadReadTimerCallback(null);
+        }
+
         private void GamepadReadTimerCallback(object? state)
         {
+            if (!IsVisible) return;
+
             var gamepad = _mainGamepad;
             if (gamepad == null) return;
 
             GamepadReading reading = gamepad.GetCurrentReading();
-            SetTriggers(reading);
-            SetButtons(reading);
-            SetLeftThumb(reading);
-            SetRightThumb(reading);
+            Dispatcher.Invoke(() =>
+            {
+                SetTriggers(reading);
+                SetButtons(reading);
+                SetLeftThumb(reading);
+                SetRightThumb(reading);
+            });
         }
 
         private void SetTriggers(GamepadReading reading)
         {
             double leftTrigger = reading.LeftTrigger;
             double rightTrigger = reading.RightTrigger;
-            LeftTriggerTextBox.Text = (leftTrigger > 0.1 ? leftTrigger : 0).ToString();
-            RightTriggerTextBox.Text = (rightTrigger > 0.1 ? rightTrigger : 0).ToString();
+            LeftTriggerTextBox.Text = leftTrigger.ToString();
+            RightTriggerTextBox.Text = rightTrigger.ToString();
         }
 
         private void SetButtons(GamepadReading reading)
@@ -73,6 +83,20 @@ namespace JoyStickDemo
             YButton.Foreground = (reading.Buttons & GamepadButtons.Y) == GamepadButtons.Y ? pressedF : normalF;
             AButton.Foreground = (reading.Buttons & GamepadButtons.A) == GamepadButtons.A ? pressedF : normalF;
             BButton.Foreground = (reading.Buttons & GamepadButtons.B) == GamepadButtons.B ? pressedF : normalF;
+
+            DirectionUp.Foreground = (reading.Buttons & GamepadButtons.DPadUp) == GamepadButtons.DPadUp ? pressedF : normalF;
+            DirectionDown.Foreground = (reading.Buttons & GamepadButtons.DPadDown) == GamepadButtons.DPadDown ? pressedF : normalF;
+            DirectionLeft.Foreground = (reading.Buttons & GamepadButtons.DPadLeft) == GamepadButtons.DPadLeft ? pressedF : normalF;
+            DirectionRight.Foreground = (reading.Buttons & GamepadButtons.DPadRight) == GamepadButtons.DPadRight ? pressedF : normalF;
+
+            LeftShoulderText.Foreground = (reading.Buttons & GamepadButtons.LeftShoulder) == GamepadButtons.LeftShoulder ? pressedF : normalF;
+            RightShoulderText.Foreground = (reading.Buttons & GamepadButtons.RightShoulder) == GamepadButtons.RightShoulder ? pressedF : normalF;
+
+            LeftThumbstickText.Foreground = (reading.Buttons & GamepadButtons.LeftThumbstick) == GamepadButtons.LeftThumbstick ? pressedF : normalF;
+            RightThumbstickText.Foreground = (reading.Buttons & GamepadButtons.RightThumbstick) == GamepadButtons.RightThumbstick ? pressedF : normalF;
+
+            MenuText.Foreground = (reading.Buttons & GamepadButtons.Menu) == GamepadButtons.Menu ? pressedF : normalF;
+            ViewText.Foreground = (reading.Buttons & GamepadButtons.View) == GamepadButtons.View ? pressedF : normalF;
         }
 
         private void SetLeftThumb(GamepadReading reading)
@@ -97,6 +121,14 @@ namespace JoyStickDemo
                 LeftThumbUp.Text = (leftStickY > 0 ? Math.Abs(leftStickY) : 0).ToString();
                 LeftThumbDown.Text = (leftStickY < 0 ? Math.Abs(leftStickY) : 0).ToString();
             }
+            else
+            {
+                string zeroS = "0";
+                LeftThumbLeft.Text = zeroS;
+                LeftThumbRight.Text = zeroS;
+                LeftThumbUp.Text = zeroS;
+                LeftThumbDown.Text = zeroS;
+            }
         }
 
         private void SetRightThumb(GamepadReading reading)
@@ -120,6 +152,14 @@ namespace JoyStickDemo
                 RightThumbRight.Text = (rightStickX > 0 ? Math.Abs(rightStickX) : 0).ToString();
                 RightThumbUp.Text = (rightStickY > 0 ? Math.Abs(rightStickY) : 0).ToString();
                 RightThumbDown.Text = (rightStickY < 0 ? Math.Abs(rightStickY) : 0).ToString();
+            }
+            else
+            {
+                string zeroS = "0";
+                RightThumbLeft.Text = zeroS;
+                RightThumbRight.Text = zeroS;
+                RightThumbUp.Text = zeroS;
+                RightThumbDown.Text = zeroS;
             }
         }
 
@@ -193,8 +233,11 @@ namespace JoyStickDemo
 
         private void SetGamepadExists(bool gamepadExists)
         {
-            GamepadExistsTextBox.Text = gamepadExists ? "游戏手柄已插入" : "游戏手柄未插入";
-            GamepadExistsTextBox.Foreground = gamepadExists ? Brushes.Green : Brushes.Black;
+            Dispatcher.Invoke(() =>
+            {
+                GamepadExistsTextBox.Text = gamepadExists ? "游戏手柄已插入" : "游戏手柄未插入";
+                GamepadExistsTextBox.Foreground = gamepadExists ? Brushes.Green : Brushes.Black;
+            });
         }
     }
 }
