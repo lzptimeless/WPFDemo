@@ -3,15 +3,17 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="DefaultTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource TextBlockFontFamily}"/>
-        <Setter Property="FontSize" Value="{StaticResource TextBlockFontSize}"/>
-        <Setter Property="Foreground" Value="{ThemeResource TextBlockForeground}"/>
+        <Setter Property="FontFamily" Value="{StaticResource TextFontFamily}"/>
+        <Setter Property="FontSize" Value="{StaticResource TextFontSize}"/>
+        <Setter Property="Foreground" Value="{ThemeResource TextForeground}"/>
     </Style>
     <Style TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}"/>
-
+    <Style x:Key="HighlightTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}">
+        <Setter Property="Foreground" Value="{ThemeResource HighlightTextForeground}"/>
+    </Style>
     <!--Custom styles-->
     <Style x:Key="WindowCaptionTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="{StaticResource WindowCaptionFontFamily}"/>
+        <Setter Property="FontFamily" Value="{StaticResource TextFontFamily}"/>
         <Setter Property="FontSize" Value="{StaticResource WindowCaptionFontSize}"/>
         <Setter Property="Foreground" Value="{ThemeResource WindowCaptionForeground}"/>
         <Setter Property="FontWeight" Value="Bold"/>

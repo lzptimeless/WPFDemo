@@ -4,65 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives">
-    <FontFamily x:Key="WindowCaptionFontFamily">XamlAutoFontFamily</FontFamily>
-    <FontFamily x:Key="TextBlockFontFamily">XamlAutoFontFamily</FontFamily>
-    <FontFamily x:Key="ContentControlFontFamily">XamlAutoFontFamily</FontFamily>
-    <FontFamily x:Key="SymbolFontFamily">XamlAutoFontFamily</FontFamily>
-    
-    <x:Double x:Key="WindowCaptionFontSize">14</x:Double>
-    <x:Double x:Key="TextBlockFontSize">12</x:Double>
-    <x:Double x:Key="TextBoxIconFontSize">12</x:Double>
-    <x:Double x:Key="ControlContentFontSize">14</x:Double>
-    <x:Double x:Key="ButtonSmallFontSize">12</x:Double>
-    <x:Double x:Key="ButtonLargeFontSize">16</x:Double>
-
     <x:Boolean x:Key="UseSystemFocusVisuals">True</x:Boolean>
 
-    <primitives:CornerRadiusFilterConverter x:Key="TopLeftCornerRadiusDoubleValueConverter" Filter="TopLeftValue" />
-    <primitives:CornerRadiusFilterConverter x:Key="BottomRightCornerRadiusDoubleValueConverter" Filter="BottomRightValue" />
+    <FontFamily x:Key="TextFontFamily">XamlAutoFontFamily</FontFamily>
+    <x:Double x:Key="TextFontSize">12</x:Double>
     
-    <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
-    <CornerRadius x:Key="OverlayCornerRadius">4</CornerRadius>
+    <x:Double x:Key="WindowCaptionFontSize">14</x:Double>
     
-    <x:String x:Key="ControlFastOutSlowInKeySpline">0,0,0,1</x:String>
-    <x:String x:Key="ControlNormalAnimationDuration">00:00:00.250</x:String>
-    <x:String x:Key="ControlFastAnimationDuration">00:00:00.167</x:String>
-    <x:String x:Key="ControlFastAnimationAfterDuration">00:00:00.168</x:String>
-    <x:String x:Key="ControlFasterAnimationDuration">00:00:00.083</x:String>
-    
-    <Thickness x:Key="ButtonBorderThickness">0</Thickness>
-    <Thickness x:Key="ButtonPadding">10,0</Thickness>
-    <x:Double x:Key="ButtonOpacityDisabled">0.5</x:Double>
-    <x:Double x:Key="ButtonHeight">33</x:Double>
-    <x:Double x:Key="ButtonSmallHeight">31</x:Double>
-    <x:Double x:Key="ButtonLargeHeight">35</x:Double>
+    <FontFamily x:Key="ContentControlFontFamily">XamlAutoFontFamily</FontFamily>
+    <x:Double x:Key="ControlContentFontSize">14</x:Double>
+    <CornerRadius x:Key="ContentControlCornerRadius">4</CornerRadius>
 
-    <Thickness x:Key="TextControlBorderThickness">1</Thickness>
-    <x:Double x:Key="TextControlMinHeight">33</x:Double>
-    <x:Double x:Key="TextControlMinWidth">33</x:Double>
-    <Thickness x:Key="TextControlPadding">10,0</Thickness>
-    <controls:TextCommandBarFlyout x:Key="TextControlCommandBarContextFlyout" Placement="BottomEdgeAlignedLeft" />
-    <controls:TextCommandBarFlyout x:Key="TextControlCommandBarSelectionFlyout" Placement="TopEdgeAlignedLeft" />
-    <Thickness x:Key="TextBoxInnerButtonMargin">9.5</Thickness>
-    <Thickness x:Key="TextBoxTopHeaderMargin">0,0,0,8</Thickness>
-    <Thickness x:Key="HelperButtonPadding">0</Thickness>
-
-    <Thickness x:Key="ComboBoxPadding">10,0</Thickness>
-    <Thickness x:Key="ComboBoxBorderThickness">1</Thickness>
-    <Thickness x:Key="ComboBoxTopHeaderMargin">0,0,0,8</Thickness>
-    <x:Double x:Key="ComboBoxMinWidth">115</x:Double>
-    <x:Double x:Key="ComboBoxMinHeight">33</x:Double>
-    <x:Double x:Key="ComboBoxItemPillHeight">16</x:Double>
-    <x:Double x:Key="ComboBoxItemPillWidth">3</x:Double>
-    <x:Double x:Key="ComboBoxItemPillMinScale">0.625</x:Double>
-    <x:Double x:Key="ComboBoxItemPillCornerRadius">1.5</x:Double>
-    <CornerRadius x:Key="ComboBoxDropDownButtonBackgroundCornerRadius">4</CornerRadius>
-    <Thickness x:Key="ComboBoxDropdownBorderThickness">0</Thickness>
-    <Thickness x:Key="ComboBoxDropdownBorderPadding">0</Thickness>
-    <Thickness x:Key="ComboBoxDropdownContentMargin">0</Thickness>
-    <Thickness x:Key="ComboBoxItemPadding">10,0</Thickness>
-    <CornerRadius x:Key="ComboBoxItemCornerRadius">0</CornerRadius>
-    <x:String x:Key="ComboBoxItemScaleAnimationDuration">00:00:00.167</x:String>
-    <Thickness x:Key="ComboBoxItemTouchPadding">11,11,11,13</Thickness>
-    <Thickness x:Key="ComboBoxItemGameControllerPadding">11,11,11,13</Thickness>
+    <x:Double x:Key="ButtonSmallFontSize">12</x:Double>
+    <x:Double x:Key="ButtonLargeFontSize">16</x:Double>
 </ResourceDictionary>

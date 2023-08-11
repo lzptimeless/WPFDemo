@@ -9,14 +9,22 @@
     xmlns:controls="CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
     <Grid x:Name="Root" Background="{StaticResource WindowBackground}" Loaded="Root_Loaded">
+        <Grid.Resources>
+            
+            
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="CustomTitleBar" Grid.Row="0">
-            <TextBlock Style="{StaticResource WindowCaptionTextBlockStyle}" Text="测试App" Margin="23,0,0,0" VerticalAlignment="Center"/>
+            <TextBlock Style="{StaticResource WindowCaptionTextBlockStyle}" Text="App Styles Demo" Margin="23,0,0,0" VerticalAlignment="Center"/>
         </Grid>
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="23">
+            <StackPanel Orientation="Vertical" Margin="0,5">
+                <TextBlock Style="{StaticResource HighlightTextBlockStyle}" Text="This is highlight text"/>
+                <TextBlock Text="This is normal text"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <Button Content="Button"></Button>
                 <Button Content="Button" IsEnabled="False" Margin="10,0,0,0"></Button>
@@ -30,16 +38,21 @@
                 <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large" IsEnabled="False" Margin="10,0,0,0"></Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBox PlaceholderText="Placeholder" Header="TextBox Header" Description="TextBox Description" Width="200"/>
-                <TextBox PlaceholderText="Placeholder Disabled" Header="TextBox Header" Description="TextBox Description" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
-                <TextBox Text="TextBox" Header="TextBox Header" Description="TextBox Description" Width="200" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                <TextBox Text="TextBox Disabled" Header="TextBox Header" Description="TextBox Description" Width="200" IsEnabled="False" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox PlaceholderText="Placeholder" Width="200"/>
+                <TextBox PlaceholderText="Placeholder Disabled" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
+                <TextBox Text="TextBox" Width="200" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <TextBox Text="TextBox Disabled" Width="200" IsEnabled="False" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <ComboBox PlaceholderText="Placeholder" Header="TextBox Header" Description="TextBox Description" Width="200"></ComboBox>
-                <ComboBox PlaceholderText="Placeholder Disabled" Header="TextBox Header" Description="TextBox Description" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
+                <ComboBox PlaceholderText="Placeholder" Width="200">
+                    <ComboBoxItem Content="Selection1"/>
+                    <ComboBoxItem Content="Selection2"/>
+                    <ComboBoxItem Content="Selection3" IsEnabled="False"/>
+                    <ComboBoxItem Content="Selection4"/>
+                </ComboBox>
+                <ComboBox PlaceholderText="Placeholder Disabled" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
             </StackPanel>
-            <TextBlock Margin="0,5">测试TextBlock测试</TextBlock>
+            <TextBlock Margin="0,5" Text="Check Demo"/>
             <CheckBox Margin="0,5">测试CheckBox测试</CheckBox>
             <RadioButton Margin="0,5">测试RadioButton测试</RadioButton>
             <ProgressBar Width="100" Margin="0,5"/>
