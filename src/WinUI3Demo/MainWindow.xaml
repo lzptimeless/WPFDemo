@@ -8,55 +8,71 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
-    <Grid x:Name="Root" Background="{StaticResource WindowBackground}" Loaded="Root_Loaded">
-        <Grid.Resources>
-            
-            
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="CustomTitleBar" Grid.Row="0">
-            <TextBlock Style="{StaticResource WindowCaptionTextBlockStyle}" Text="App Styles Demo" Margin="23,0,0,0" VerticalAlignment="Center"/>
+    <ScrollViewer VerticalScrollMode="Auto">
+        <Grid x:Name="Root" Background="{StaticResource WindowBackground}" Loaded="Root_Loaded">
+            <Grid.Resources>
+                
+                
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="CustomTitleBar" Grid.Row="0">
+                <TextBlock Style="{StaticResource WindowCaptionTextBlockStyle}" Text="App Styles Demo" Margin="23,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="23">
+                <StackPanel Orientation="Vertical" Margin="0,5">
+                    <TextBlock Style="{StaticResource HighlightTextBlockStyle}" Text="This is highlight text"/>
+                    <TextBlock Text="This is normal text"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Button Content="Button"></Button>
+                    <Button Content="Button" IsEnabled="False" Margin="10,0,0,0"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Button Style="{StaticResource ButtonSmallStyle}" Content="Button Small"></Button>
+                    <Button Style="{StaticResource ButtonSmallStyle}" Content="Button Small" IsEnabled="False" Margin="10,0,0,0"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large"></Button>
+                    <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large" IsEnabled="False" Margin="10,0,0,0"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <TextBox PlaceholderText="Placeholder" Width="200"/>
+                    <TextBox PlaceholderText="Placeholder Disabled" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
+                    <TextBox Text="TextBox" Width="200" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBox Text="TextBox Disabled" Width="200" IsEnabled="False" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <ComboBox PlaceholderText="Placeholder" Width="200">
+                        <ComboBoxItem Content="Selection1"/>
+                        <ComboBoxItem Content="Selection2"/>
+                        <ComboBoxItem Content="Selection3" IsEnabled="False"/>
+                        <ComboBoxItem Content="Selection4"/>
+                    </ComboBox>
+                    <ComboBox PlaceholderText="Placeholder Disabled" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <TimePicker ClockIdentifier="24HourClock"/>
+                </StackPanel>
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <Slider Width="200" Value="50" Minimum="0" Maximum="100" TickFrequency="10" TickPlacement="Inline" HorizontalAlignment="Left"/>
+                        <Slider Width="200" Value="50" Minimum="0" Maximum="100"  Margin="0,10,0,0" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <Slider Grid.Column="1" Height="200" Orientation="Vertical" Value="50" Minimum="0" Maximum="100" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+                </Grid>
+                <TextBlock Margin="0,5" Text="Check Demo"/>
+                <CheckBox Margin="0,5">测试CheckBox测试</CheckBox>
+                <RadioButton Margin="0,5">测试RadioButton测试</RadioButton>
+                <ProgressBar Width="100" Margin="0,5"/>
+                <Slider Width="100" Margin="0,5"/>
+            </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="23">
-            <StackPanel Orientation="Vertical" Margin="0,5">
-                <TextBlock Style="{StaticResource HighlightTextBlockStyle}" Text="This is highlight text"/>
-                <TextBlock Text="This is normal text"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Button Content="Button"></Button>
-                <Button Content="Button" IsEnabled="False" Margin="10,0,0,0"></Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Button Style="{StaticResource ButtonSmallStyle}" Content="Button Small"></Button>
-                <Button Style="{StaticResource ButtonSmallStyle}" Content="Button Small" IsEnabled="False" Margin="10,0,0,0"></Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large"></Button>
-                <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large" IsEnabled="False" Margin="10,0,0,0"></Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBox PlaceholderText="Placeholder" Width="200"/>
-                <TextBox PlaceholderText="Placeholder Disabled" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
-                <TextBox Text="TextBox" Width="200" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                <TextBox Text="TextBox Disabled" Width="200" IsEnabled="False" VerticalAlignment="Center" Margin="10,0,0,0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <ComboBox PlaceholderText="Placeholder" Width="200">
-                    <ComboBoxItem Content="Selection1"/>
-                    <ComboBoxItem Content="Selection2"/>
-                    <ComboBoxItem Content="Selection3" IsEnabled="False"/>
-                    <ComboBoxItem Content="Selection4"/>
-                </ComboBox>
-                <ComboBox PlaceholderText="Placeholder Disabled" Width="200" IsEnabled="False" Margin="10,0,0,0"/>
-            </StackPanel>
-            <TextBlock Margin="0,5" Text="Check Demo"/>
-            <CheckBox Margin="0,5">测试CheckBox测试</CheckBox>
-            <RadioButton Margin="0,5">测试RadioButton测试</RadioButton>
-            <ProgressBar Width="100" Margin="0,5"/>
-            <Slider Width="100" Margin="0,5"/>
-        </StackPanel>
-    </Grid>
+    </ScrollViewer>
 </Window>

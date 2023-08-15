@@ -11,10 +11,18 @@
     
     <x:Double x:Key="WindowCaptionFontSize">14</x:Double>
     
+    <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
+    
     <FontFamily x:Key="ContentControlFontFamily">XamlAutoFontFamily</FontFamily>
     <x:Double x:Key="ControlContentFontSize">14</x:Double>
     <CornerRadius x:Key="ContentControlCornerRadius">4</CornerRadius>
 
     <x:Double x:Key="ButtonSmallFontSize">12</x:Double>
     <x:Double x:Key="ButtonLargeFontSize">16</x:Double>
+
+    <x:String x:Key="ControlFastOutSlowInKeySpline">0,0,0,1</x:String>
+    <x:String x:Key="ControlNormalAnimationDuration">00:00:00.250</x:String>
+    <x:String x:Key="ControlFastAnimationDuration">00:00:00.167</x:String>
+    <x:String x:Key="ControlFastAnimationAfterDuration">00:00:00.168</x:String>
+    <x:String x:Key="ControlFasterAnimationDuration">00:00:00.083</x:String>
 </ResourceDictionary>

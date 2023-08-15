@@ -114,4 +114,26 @@
 
     <SolidColorBrush x:Key="ComboBoxBackgroundUnfocused" Color="#161616"/>
     <SolidColorBrush x:Key="ComboBoxBackgroundBorderBrushUnfocused" Color="#6F6F6F"/>
+
+    <SolidColorBrush x:Key="SliderTrackFill" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="SliderTrackValueFill" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="SliderThumbBackground" Color="White"/>
+    <SolidColorBrush x:Key="SliderThumbForeground" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="SliderThumbBorderBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="SliderContainerBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="SliderTickBarFill" Color="#A8A8A8"/>
+    <SolidColorBrush x:Key="SliderInlineTickBarFill" Color="#A8A8A8"/>
+    <SolidColorBrush x:Key="SliderTrackFillPressed" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="SliderTrackValueFillPressed" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="SliderThumbBackgroundPressed" Color="White"/>
+    <SolidColorBrush x:Key="SliderContainerBackgroundPressed" Color="Transparent"/>
+    <SolidColorBrush x:Key="SliderTrackFillDisabled" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="SliderTrackValueFillDisabled" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="SliderThumbBackgroundDisabled" Color="White"/>
+    <SolidColorBrush x:Key="SliderContainerBackgroundDisabled" Color="Transparent"/>
+    <SolidColorBrush x:Key="SliderTickBarFillDisabled" Color="#A8A8A8"/>
+    <SolidColorBrush x:Key="SliderTrackFillPointerOver" Color="#E0E0E0"/>
+    <SolidColorBrush x:Key="SliderTrackValueFillPointerOver" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="SliderThumbBackgroundPointerOver" Color="White"/>
+    <SolidColorBrush x:Key="SliderContainerBackgroundPointerOver" Color="Transparent"/>
 </ResourceDictionary>
