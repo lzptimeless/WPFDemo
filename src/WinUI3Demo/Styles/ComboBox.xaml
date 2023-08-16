@@ -480,4 +480,183 @@
         </Setter>
     </Style>
     <Style TargetType="ComboBox" BasedOn="{StaticResource DefaultComboBoxStyle}"/>
+
+    <BrushCollection x:Key="ComboBoxColorPickSelections">
+        <SolidColorBrush Color="#EEEEEE"/>
+        <SolidColorBrush Color="#E02020"/>
+        <SolidColorBrush Color="#FA6400"/>
+        <SolidColorBrush Color="#6DD400"/>
+        <SolidColorBrush Color="#3E5DFF"/>
+        <SolidColorBrush Color="#32C5FF"/>
+    </BrushCollection>
+    <Style x:Key="ComboBoxItemColorPickStyle" TargetType="ComboBoxItem">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="Margin" Value="4,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Grid x:Name="LayoutRoot">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="Border.Opacity" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="LayoutRoot.Opacity" Value="0.5" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="Border.Opacity" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Target="Border.Opacity" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="SelectedUnfocused">
+                                    <VisualState.Setters>
+                                        <Setter Target="Border.Opacity" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="SelectedDisabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="Border.Opacity" Value="1" />
+                                        <Setter Target="LayoutRoot.Opacity" Value="0.5" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="SelectedPointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="Border.Opacity" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="SelectedPressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="Border.Opacity" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Ellipse x:Name="Border" Stroke="{StaticResource ComboBoxItemColorPickBorderPointerOver}" StrokeThickness="1"
+                             Opacity="0"/>
+                        <Ellipse Margin="2" Fill="{TemplateBinding Content}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ComboBoxColorPickStyle" TargetType="ComboBox">
+        <Setter Property="TabNavigation" Value="Once" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
+        <Setter Property="Background" Value="{ThemeResource ComboBoxBackground}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="UseSystemFocusVisuals" Value="{ThemeResource UseSystemFocusVisuals}" />
+        <Setter Property="CornerRadius" Value="{StaticResource ContentControlCornerRadius}"/>
+        <Setter Property="MinHeight" Value="23"/>
+        <Setter Property="MinWidth" Value="30"/>
+        <Setter Property="MaxWidth" Value="30"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="ItemsSource" Value="{StaticResource ComboBoxColorPickSelections}"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemColorPickStyle}"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" Padding="6,8"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid x:Name="LayoutRoot">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver">
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused">
+                                </VisualState>
+                                <VisualState x:Name="FocusedPressed">
+                                </VisualState>
+                                <VisualState x:Name="Unfocused" />
+                                <VisualState x:Name="PointerFocused" />
+                                <VisualState x:Name="FocusedDropDown">
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="DropDownStates">
+                                <VisualState x:Name="Opened">
+                                </VisualState>
+                                <VisualState x:Name="Closed">
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="EditableModeStates">
+                                <VisualState x:Name="TextBoxFocused">
+                                </VisualState>
+                                <VisualState x:Name="TextBoxFocusedOverlayPointerOver">
+                                </VisualState>
+                                <VisualState x:Name="TextBoxFocusedOverlayPressed">
+                                </VisualState>
+                                <VisualState x:Name="TextBoxOverlayPointerOver">
+                                </VisualState>
+                                <VisualState x:Name="TextBoxOverlayPressed">
+                                </VisualState>
+                                <VisualState x:Name="TextBoxUnfocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border Background="{ThemeResource ComboBoxDropDownBackground}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        </Border>
+                        <ContentPresenter x:Name="ContentPresenter"
+                                      Margin="{TemplateBinding Padding}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Foreground="{TemplateBinding SelectedValue}"
+                                      Background="{TemplateBinding SelectedValue}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                      Control.IsTemplateFocusTarget="True"
+                                      Width="{TemplateBinding Width}">
+                        </ContentPresenter>
+                        <Popup x:Name="Popup" VerticalOffset="33">
+                            <Border x:Name="PopupBorder"
+                                Background="{ThemeResource ComboBoxDropDownBackground}"
+                                BackgroundSizing="OuterBorderEdge"
+                                BorderBrush="{ThemeResource ComboBoxDropDownBorderBrush}"
+                                BorderThickness="0"
+                                CornerRadius="{StaticResource ContentControlCornerRadius}"
+                                Margin="0,-1,0,-1"
+                                Padding="0"
+                                HorizontalAlignment="Stretch">
+                                <Border.RenderTransform>
+                                    <TranslateTransform Y="0"/>
+                                </Border.RenderTransform>
+                                <ItemsPresenter/>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

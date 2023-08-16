@@ -115,6 +115,8 @@
     <SolidColorBrush x:Key="ComboBoxBackgroundUnfocused" Color="#161616"/>
     <SolidColorBrush x:Key="ComboBoxBackgroundBorderBrushUnfocused" Color="#6F6F6F"/>
 
+    <SolidColorBrush x:Key="ComboBoxItemColorPickBorderPointerOver" Color="#3E5DFF"/>
+    
     <SolidColorBrush x:Key="SliderTrackFill" Color="#E0E0E0"/>
     <SolidColorBrush x:Key="SliderTrackValueFill" Color="#3E5DFF"/>
     <SolidColorBrush x:Key="SliderThumbBackground" Color="White"/>
