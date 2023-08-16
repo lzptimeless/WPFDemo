@@ -136,4 +136,57 @@
     <SolidColorBrush x:Key="SliderTrackValueFillPointerOver" Color="#3E5DFF"/>
     <SolidColorBrush x:Key="SliderThumbBackgroundPointerOver" Color="White"/>
     <SolidColorBrush x:Key="SliderContainerBackgroundPointerOver" Color="Transparent"/>
+
+    <SolidColorBrush x:Key="RadioButtonBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonBorderBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonForeground" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="RadioButtonCheckerContainerBackground" Color="#393939"/>
+    <SolidColorBrush x:Key="RadioButtonCheckerGlyphFill" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="RadioButtonCheckerCheckedContainerBackground" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="RadioButtonCheckerCheckedGlyphFill" Color="White"/>
+    <SolidColorBrush x:Key="RadioButtonBackgroundPointerOver" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonBorderBrushPointerOver" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonForegroundPointerOver" Color="White"/>
+    <SolidColorBrush x:Key="RadioButtonBackgroundPressed" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonBorderBrushPressed" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonForegroundPressed" Color="White"/>
+    <SolidColorBrush x:Key="RadioButtonBackgroundDisabled" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonBorderBrushDisabled" Color="Transparent"/>
+    <SolidColorBrush x:Key="RadioButtonForegroundDisabled" Color="#8D8D8D"/>
+
+    <SolidColorBrush x:Key="CheckBoxBackgroundUnchecked" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUnchecked" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushUnchecked" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUnchecked" Color="#393939"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundUnchecked" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundChecked" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushChecked" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundChecked" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="#393939"/>
+    <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundChecked" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointOver" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPointerOver" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPressed" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundIndeterminate" Color="Transparent"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushIndeterminate" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundIndeterminate" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeIndeterminate" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillIndeterminate" Color="#393939"/>
+    <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundIndeterminate" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundIndeterminatePointerOver" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeIndeterminatePointerOver" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundIndeterminatePressed" Color="White"/>
+    <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeIndeterminatePressed" Color="#3E5DFF"/>
+
+    <SolidColorBrush x:Key="CheckBoxCheckContainerBackgroundUnchecked" Color="#393939"/>
+    <SolidColorBrush x:Key="CheckBoxCheckGlyphFillUnchecked" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="CheckBoxCheckContainerBackgroundChecked" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="CheckBoxCheckGlyphFillChecked" Color="White"/>
 </ResourceDictionary>
