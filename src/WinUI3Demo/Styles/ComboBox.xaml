@@ -545,7 +545,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Ellipse x:Name="Border" Stroke="{StaticResource ComboBoxItemColorPickBorderPointerOver}" StrokeThickness="1"
+                        <Ellipse x:Name="Border" Stroke="{ThemeResource ComboBoxItemColorPickBorderPointerOver}" StrokeThickness="1"
                              Opacity="0"/>
                         <Ellipse Margin="2" Fill="{TemplateBinding Content}"/>
                     </Grid>

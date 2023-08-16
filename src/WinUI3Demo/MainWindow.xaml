@@ -13,6 +13,49 @@
     <ScrollViewer VerticalScrollMode="Auto">
         <Grid x:Name="Root" Background="{StaticResource WindowBackground}" Loaded="Root_Loaded">
             <Grid.Resources>
+                <Style x:Key="DefaultFlyoutPresenterStyle" TargetType="FlyoutPresenter">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="IsTabStop" Value="False" />
+                    <Setter Property="Background" Value="{ThemeResource FlyoutPresenterBackground}" />
+                    <Setter Property="BorderBrush" Value="{ThemeResource FlyoutBorderThemeBrush}" />
+                    <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}" />
+                    <Setter Property="Padding" Value="{StaticResource FlyoutContentPadding}" />
+                    <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}" />
+                    <Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}" />
+                    <Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}" />
+                    <Setter Property="MaxHeight" Value="{ThemeResource FlyoutThemeMaxHeight}" />
+                    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto" />
+                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                    <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+                    <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="FlyoutPresenter">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" BackgroundSizing="InnerBorderEdge">
+                                    <ScrollViewer x:Name="ScrollViewer"
+                ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
+                HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                AutomationProperties.AccessibilityView="Raw">
+                                        <ContentPresenter Content="{TemplateBinding Content}"
+                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                  ContentTransitions="{TemplateBinding ContentTransitions}"
+                  Margin="{TemplateBinding Padding}"
+                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    </ScrollViewer>
+                                </Border>
+
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="FlyoutPresenter" BasedOn="{StaticResource DefaultFlyoutPresenterStyle}" />
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -37,6 +80,9 @@
                 <StackPanel Orientation="Horizontal" Margin="0,5">
                     <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large"></Button>
                     <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large" IsEnabled="False" Margin="10,0,0,0"></Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Button Style="{StaticResource ButtonCaptionCloseStyle}"></Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5">
                     <TextBox PlaceholderText="Placeholder" Width="200"/>
@@ -78,8 +124,43 @@
                     <CheckBox Margin="0,5" Content="Option" IsChecked="{x:Null}" IsEnabled="False"/>
                     <CheckBox Margin="0,5" Content="Option" IsChecked="True" IsEnabled="False"/>
                 </StackPanel>
-                <StackPanel Margin="0,5">
+                <Grid Margin="0,5" HorizontalAlignment="Left">
+                    <PathIcon Data="M0 10C0 4.47716 4.47715 0 10 0H278C283.523 0 288 4.47715 288 10V138C288 143.523 283.523 148 278 148H10C4.47715 148 0 143.523 0 138V10ZM7 7H281V141H7V7ZM89.8575 159L95.2625 153.201H194.736L200.143 159H89.8575Z"
+                              Foreground="#222222"/>
+                    <Grid Margin="7,7,7,18" Width="274">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton Style="{StaticResource FPSPositionRadioButtonStyle}" Content="FPS" GroupName="FPSPositionGroup"/>
+                        <RadioButton Grid.Column="1" Style="{StaticResource FPSPositionRadioButtonStyle}" Content="FPS"  GroupName="FPSPositionGroup"/>
+                        <RadioButton Grid.Column="2" Style="{StaticResource FPSPositionRadioButtonStyle}" Content="FPS" GroupName="FPSPositionGroup"/>
+                        <RadioButton Grid.Row="2" Style="{StaticResource FPSPositionRadioButtonStyle}" Content="FPS" GroupName="FPSPositionGroup"/>
+                        <RadioButton Grid.Row="2" Grid.Column="1" Style="{StaticResource FPSPositionRadioButtonStyle}" Content="FPS" GroupName="FPSPositionGroup"/>
+                        <RadioButton Grid.Row="2" Grid.Column="2" Style="{StaticResource FPSPositionRadioButtonStyle}" Content="FPS" GroupName="FPSPositionGroup"/>
+                    </Grid>
+                </Grid>
+                <StackPanel Margin="0,5" Orientation="Horizontal">
                     <ComboBox Style="{StaticResource ComboBoxColorPickStyle}"/>
+                    <Grid Margin="10,0,0,0" ToolTipService.ToolTip="100" ToolTipService.Placement="Bottom">
+                        <Ellipse Width="15" Height="15" Fill="White"/>
+                        <Ellipse Width="9" Height="9" Fill="#3E5DFF"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="0,5" Orientation="Horizontal">
+                    <Button Content="Flyout">
+                        <Button.Flyout>
+                            <Flyout Placement="BottomEdgeAlignedLeft">
+                                <TextBlock Text="This is testing flyout content."/>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </Grid>

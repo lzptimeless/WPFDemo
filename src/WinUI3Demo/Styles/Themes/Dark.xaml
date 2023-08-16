@@ -24,6 +24,13 @@
     <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent"/>
     <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="White"/>
 
+    <SolidColorBrush x:Key="ButtonCaptionCloseBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonCaptionCloseForeground" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="ButtonCaptionCloseBackgroundPointerOver" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonCaptionCloseForegroundPointerOver" Color="White"/>
+    <SolidColorBrush x:Key="ButtonCaptionCloseBackgroundPressed" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonCaptionCloseForegroundPressed" Color="White"/>
+
     <SolidColorBrush x:Key="TextControlBackground" Color="#161616"/>
     <SolidColorBrush x:Key="TextControlBorderBrush" Color="#6F6F6F"/>
     <SolidColorBrush x:Key="TextControlForeground" Color="White"/>
@@ -156,6 +163,10 @@
     <SolidColorBrush x:Key="RadioButtonBorderBrushDisabled" Color="Transparent"/>
     <SolidColorBrush x:Key="RadioButtonForegroundDisabled" Color="#8D8D8D"/>
 
+    <SolidColorBrush x:Key="FPSPositionRadioButtonUncheckedBackground" Color="#222222"/>
+    <SolidColorBrush x:Key="FPSPositionRadioButtonUncheckedBorderBrush" Color="#323232"/>
+    <SolidColorBrush x:Key="FPSPositionRadioButtonUncheckedForeground" Color="Transparent"/>
+
     <SolidColorBrush x:Key="CheckBoxBackgroundUnchecked" Color="Transparent"/>
     <SolidColorBrush x:Key="CheckBoxForegroundUnchecked" Color="#8D8D8D"/>
     <SolidColorBrush x:Key="CheckBoxBorderBrushUnchecked" Color="#6F6F6F"/>
@@ -191,4 +202,13 @@
     <SolidColorBrush x:Key="CheckBoxCheckGlyphFillUnchecked" Color="#3E5DFF"/>
     <SolidColorBrush x:Key="CheckBoxCheckContainerBackgroundChecked" Color="#3E5DFF"/>
     <SolidColorBrush x:Key="CheckBoxCheckGlyphFillChecked" Color="White"/>
+
+    <SolidColorBrush x:Key="ToolTipForegroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="ToolTipBackgroundBrush" Color="#393939"/>
+    <SolidColorBrush x:Key="ToolTipBorderBrush" Color="#6F6F6F"/>
+    <Thickness x:Key="ToolTipBorderThemeThickness">0</Thickness>
+
+    <SolidColorBrush x:Key="FlyoutPresenterBackground" Color="#393939"/>
+    <SolidColorBrush x:Key="FlyoutBorderThemeBrush" Color="#6F6F6F"/>
+    <Thickness x:Key="FlyoutBorderThemeThickness">0</Thickness>
 </ResourceDictionary>
