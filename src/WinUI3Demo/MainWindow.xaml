@@ -140,19 +140,28 @@
                         <Button Style="{StaticResource ButtonTimespanStyle}" Width="115" Content="{x:Bind TimespanPickerData.Text, Mode=OneWay}">
                             <Button.Flyout>
                                 <Flyout Placement="Bottom" Opened="Flyout_Opened">
+                                    <Flyout.FlyoutPresenterStyle>
+                                        <Style TargetType="FlyoutPresenter" BasedOn="{StaticResource DefaultFlyoutPresenterStyle}">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </Flyout.FlyoutPresenterStyle>
                                     <Grid Grid.Row="1" Width="115" Height="140" Background="#393939" CornerRadius="{StaticResource ContentControlCornerRadius}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <ListBox x:Name="TimespanListBoxHours" Style="{StaticResource ListBoxTimespanStyle}" 
                                                  ItemsSource="{x:Bind TimespanPickerData.AllHours}"
                                                  SelectedValue="{x:Bind TimespanPickerData.Hours, Mode=TwoWay}"></ListBox>
-                                        <ListBox x:Name="TimespanListBoxMinutes" Grid.Column="1" Style="{StaticResource ListBoxTimespanStyle}" 
+                                        <Rectangle Grid.Column="1" Width="1" Fill="{ThemeResource ListBoxTimespanBorderBrush}"/>
+                                        <ListBox x:Name="TimespanListBoxMinutes" Grid.Column="2" Style="{StaticResource ListBoxTimespanStyle}" 
                                                  ItemsSource="{x:Bind TimespanPickerData.AllMinutes}"
                                                  SelectedValue="{x:Bind TimespanPickerData.Minutes, Mode=TwoWay}"></ListBox>
-                                        <ListBox x:Name="TimespanListBoxSeconds" Grid.Column="2" Style="{StaticResource ListBoxTimespanStyle}"
+                                        <Rectangle Grid.Column="3" Width="1" Fill="{ThemeResource ListBoxTimespanBorderBrush}"/>
+                                        <ListBox x:Name="TimespanListBoxSeconds" Grid.Column="4" Style="{StaticResource ListBoxTimespanStyle}"
                                                  ItemsSource="{x:Bind TimespanPickerData.AllSeconds}"
                                                  SelectedValue="{x:Bind TimespanPickerData.Seconds, Mode=TwoWay}"></ListBox>
                                     </Grid>
