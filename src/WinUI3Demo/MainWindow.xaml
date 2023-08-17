@@ -11,51 +11,8 @@
     xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
     mc:Ignorable="d">
     <ScrollViewer VerticalScrollMode="Auto">
-        <Grid x:Name="Root" Background="{StaticResource WindowBackground}" Loaded="Root_Loaded">
+        <Grid x:Name="Root" Background="{ThemeResource WindowBackground}" Loaded="Root_Loaded">
             <Grid.Resources>
-                <Style x:Key="DefaultFlyoutPresenterStyle" TargetType="FlyoutPresenter">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                    <Setter Property="IsTabStop" Value="False" />
-                    <Setter Property="Background" Value="{ThemeResource FlyoutPresenterBackground}" />
-                    <Setter Property="BorderBrush" Value="{ThemeResource FlyoutBorderThemeBrush}" />
-                    <Setter Property="BorderThickness" Value="{ThemeResource FlyoutBorderThemeThickness}" />
-                    <Setter Property="Padding" Value="{StaticResource FlyoutContentPadding}" />
-                    <Setter Property="MinWidth" Value="{ThemeResource FlyoutThemeMinWidth}" />
-                    <Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}" />
-                    <Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}" />
-                    <Setter Property="MaxHeight" Value="{ThemeResource FlyoutThemeMaxHeight}" />
-                    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto" />
-                    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-                    <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
-                    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-                    <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
-                    <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="FlyoutPresenter">
-                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" BackgroundSizing="InnerBorderEdge">
-                                    <ScrollViewer x:Name="ScrollViewer"
-                ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
-                HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-                HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-                VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                AutomationProperties.AccessibilityView="Raw">
-                                        <ContentPresenter Content="{TemplateBinding Content}"
-                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                  ContentTransitions="{TemplateBinding ContentTransitions}"
-                  Margin="{TemplateBinding Padding}"
-                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                                    </ScrollViewer>
-                                </Border>
-
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                <Style TargetType="FlyoutPresenter" BasedOn="{StaticResource DefaultFlyoutPresenterStyle}" />
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -82,7 +39,9 @@
                     <Button Style="{StaticResource ButtonLargeStyle}" Content="Button Large" IsEnabled="False" Margin="10,0,0,0"></Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5">
-                    <Button Style="{StaticResource ButtonCaptionCloseStyle}"></Button>
+                    <Button Style="{StaticResource ButtonIconStyle}">
+                        <PathIcon Data="{StaticResource PathDataClose}"/>
+                    </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5">
                     <TextBox PlaceholderText="Placeholder" Width="200"/>
@@ -147,20 +106,60 @@
                     </Grid>
                 </Grid>
                 <StackPanel Margin="0,5" Orientation="Horizontal">
-                    <ComboBox Style="{StaticResource ComboBoxColorPickStyle}"/>
-                    <Grid Margin="10,0,0,0" ToolTipService.ToolTip="100" ToolTipService.Placement="Bottom">
+                    <ComboBox Style="{StaticResource ComboBoxColorPickStyle}" VerticalAlignment="Center"/>
+                    <Grid Margin="10,0,0,0" ToolTipService.ToolTip="100" ToolTipService.Placement="Bottom" 
+                          VerticalAlignment="Center">
                         <Ellipse Width="15" Height="15" Fill="White"/>
-                        <Ellipse Width="9" Height="9" Fill="#3E5DFF"/>
+                        <Ellipse Width="9" Height="9" Fill="{ThemeResource AccentBrush}"/>
                     </Grid>
-                </StackPanel>
-                <StackPanel Margin="0,5" Orientation="Horizontal">
-                    <Button Content="Flyout">
+                    <Button Content="Flyout" Margin="10,0,0,0">
                         <Button.Flyout>
-                            <Flyout Placement="BottomEdgeAlignedLeft">
-                                <TextBlock Text="This is testing flyout content."/>
+                            <Flyout FlyoutPresenterStyle="{StaticResource DefaultFlyoutPresenterStyle}"
+                                    Placement="BottomEdgeAlignedLeft">
+                                <StackPanel Margin="23" Width="391">
+                                    <Grid Width="30" Height="30" Margin="0,5,0,15">
+                                        <PathIcon Data="M 0.33,4.84 C 0.33,4.84 6.33,10.34 6.33,10.34 6.33,10.34 15.33,1.84 15.33,1.84 16.33,0.84 14.83,-0.66 13.83,0.34 13.83,0.34 6.33,7.45 6.33,7.45 6.33,7.45 1.83,3.34 1.83,3.34 0.83,2.34 -0.67,3.84 0.33,4.84 Z"
+                                                  Foreground="{ThemeResource AccentBrush}"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center"/>
+                                        <Ellipse Stroke="{ThemeResource AccentBrush}" StrokeThickness="2"/>
+                                    </Grid>
+                                    <TextBlock Text="New apearance settings has been applied,You can use the shortcut alt + tab to checkout the results."
+                                               TextWrapping="WrapWholeWords"
+                                               TextAlignment="Center"
+                                               FontSize="14"/>
+                                </StackPanel>
                             </Flyout>
                         </Button.Flyout>
                     </Button>
+                    <Grid Margin="10,0,0,0" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Style="{StaticResource ButtonTimespanStyle}" Width="115" Content="{x:Bind TimespanPickerData.Text, Mode=OneWay}">
+                            <Button.Flyout>
+                                <Flyout Placement="Bottom" Opened="Flyout_Opened">
+                                    <Grid Grid.Row="1" Width="115" Height="140" Background="#393939" CornerRadius="{StaticResource ContentControlCornerRadius}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <ListBox x:Name="TimespanListBoxHours" Style="{StaticResource ListBoxTimespanStyle}" 
+                                                 ItemsSource="{x:Bind TimespanPickerData.AllHours}"
+                                                 SelectedValue="{x:Bind TimespanPickerData.Hours, Mode=TwoWay}"></ListBox>
+                                        <ListBox x:Name="TimespanListBoxMinutes" Grid.Column="1" Style="{StaticResource ListBoxTimespanStyle}" 
+                                                 ItemsSource="{x:Bind TimespanPickerData.AllMinutes}"
+                                                 SelectedValue="{x:Bind TimespanPickerData.Minutes, Mode=TwoWay}"></ListBox>
+                                        <ListBox x:Name="TimespanListBoxSeconds" Grid.Column="2" Style="{StaticResource ListBoxTimespanStyle}"
+                                                 ItemsSource="{x:Bind TimespanPickerData.AllSeconds}"
+                                                 SelectedValue="{x:Bind TimespanPickerData.Seconds, Mode=TwoWay}"></ListBox>
+                                    </Grid>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </Grid>

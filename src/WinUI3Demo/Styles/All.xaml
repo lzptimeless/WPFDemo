@@ -15,5 +15,7 @@
         <ResourceDictionary Source="./Slider.xaml"/>
         <ResourceDictionary Source="./RadioButton.xaml"/>
         <ResourceDictionary Source="./CheckBox.xaml"/>
+        <ResourceDictionary Source="./Flyout.xaml"/>
+        <ResourceDictionary Source="./ListBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

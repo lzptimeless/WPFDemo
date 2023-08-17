@@ -2,6 +2,8 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="AccentBrush" Color="#3E5DFF"/>
+
     <SolidColorBrush x:Key="WindowBackground" Color="#161616"/>
     <SolidColorBrush x:Key="WindowCaptionBackground" Color="Transparent"/>
     <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled"  Color="Transparent"/>
@@ -24,12 +26,25 @@
     <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent"/>
     <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="White"/>
 
-    <SolidColorBrush x:Key="ButtonCaptionCloseBackground" Color="Transparent"/>
-    <SolidColorBrush x:Key="ButtonCaptionCloseForeground" Color="#8D8D8D"/>
-    <SolidColorBrush x:Key="ButtonCaptionCloseBackgroundPointerOver" Color="Transparent"/>
-    <SolidColorBrush x:Key="ButtonCaptionCloseForegroundPointerOver" Color="White"/>
-    <SolidColorBrush x:Key="ButtonCaptionCloseBackgroundPressed" Color="Transparent"/>
-    <SolidColorBrush x:Key="ButtonCaptionCloseForegroundPressed" Color="White"/>
+    <SolidColorBrush x:Key="ButtonTimespanBackground" Color="#161616"/>
+    <SolidColorBrush x:Key="ButtonTimespanBorderBrush" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="ButtonTimespanForeground" Color="White"/>
+    <SolidColorBrush x:Key="ButtonTimespanBackgroundPointerOver" Color="#393939"/>
+    <SolidColorBrush x:Key="ButtonTimespanBorderBrushPointerOver" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="ButtonTimespanForegroundPointerOver" Color="White"/>
+    <SolidColorBrush x:Key="ButtonTimespanBackgroundPressed" Color="#161616"/>
+    <SolidColorBrush x:Key="ButtonTimespanBorderBrushPressed" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="ButtonTimespanForegroundPressed" Color="White"/>
+
+    <SolidColorBrush x:Key="ButtonIconBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonIconBorderBrush" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="ButtonIconForeground" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="ButtonIconBackgroundPointerOver" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonIconBorderBrushPointerOver" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="ButtonIconForegroundPointerOver" Color="White"/>
+    <SolidColorBrush x:Key="ButtonIconBackgroundPressed" Color="#393939"/>
+    <SolidColorBrush x:Key="ButtonIconBorderBrushPressed" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="ButtonIconForegroundPressed" Color="White"/>
 
     <SolidColorBrush x:Key="TextControlBackground" Color="#161616"/>
     <SolidColorBrush x:Key="TextControlBorderBrush" Color="#6F6F6F"/>
@@ -208,7 +223,21 @@
     <SolidColorBrush x:Key="ToolTipBorderBrush" Color="#6F6F6F"/>
     <Thickness x:Key="ToolTipBorderThemeThickness">0</Thickness>
 
-    <SolidColorBrush x:Key="FlyoutPresenterBackground" Color="#393939"/>
-    <SolidColorBrush x:Key="FlyoutBorderThemeBrush" Color="#6F6F6F"/>
-    <Thickness x:Key="FlyoutBorderThemeThickness">0</Thickness>
+    <SolidColorBrush x:Key="FlyoutPresenterBackground" Color="#161616"/>
+    <SolidColorBrush x:Key="FlyoutBorderThemeBrush" Color="#393939"/>
+    <SolidColorBrush x:Key="FlyoutPresenterForeground" Color="#8D8D8D"/>
+
+    <SolidColorBrush x:Key="ListBoxItemTimespanBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanForeground" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanBackgroundPointerOver" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanForegroundPointerOver" Color="White"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanBackgroundPressed" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanForegroundPressed" Color="White"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanForegroundDisabled" Color="#8D8D8D"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanBackgroundSelected" Color="#3E5DFF"/>
+    <SolidColorBrush x:Key="ListBoxItemTimespanForegroundSelected" Color="White"/>
+
+    <SolidColorBrush x:Key="ListBoxTimespanBackground" Color="Transparent"/>
+    <SolidColorBrush x:Key="ListBoxTimespanBorderBrush" Color="#6F6F6F"/>
+    <SolidColorBrush x:Key="ListBoxTimespanForeground" Color="#8D8D8D"/>
 </ResourceDictionary>

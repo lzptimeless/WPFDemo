@@ -10,18 +10,21 @@
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="ComboBox.xaml" />
     <None Remove="Styles\All.xaml" />
     <None Remove="Styles\Button.xaml" />
     <None Remove="Styles\CheckBox.xaml" />
+    <None Remove="Styles\Flyout.xaml" />
     <None Remove="Styles\RadioButton.xaml" />
     <None Remove="Styles\Slider.xaml" />
     <None Remove="Styles\TextBlock.xaml" />
     <None Remove="Styles\TextBox.xaml" />
     <None Remove="Styles\Themes\Common.xaml" />
     <None Remove="Styles\Themes\Dark.xaml" />
+    <None Remove="Styles\Themes\ListBox.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +50,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Styles\Themes\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Styles\Flyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Styles\CheckBox.xaml">
