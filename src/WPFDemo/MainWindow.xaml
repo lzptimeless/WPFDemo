@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <StackPanel>
+            <TextBlock>
+                <Run>This is a</Run>
+                <Hyperlink>link</Hyperlink>
+                <Run>for gamer</Run>
+            </TextBlock>
+            <RichTextBox>
+                <FlowDocument>
+                    <Paragraph>
+                        <Run>This is a</Run>
+                        <Hyperlink>link</Hyperlink>
+                        <Run>for gamer</Run>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </StackPanel>
     </Grid>
 </Window>

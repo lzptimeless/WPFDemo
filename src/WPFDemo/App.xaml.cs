@@ -26,10 +26,10 @@ namespace WPFDemo
 
         public App()
         {
-            SingleInstanceFeature = new SingleInstanceFeature();
-            AdminFeature = new AdminFeature();
-            SystrayFeature = new SystrayFeature();
-            CustomUrlFeature = new CustomUrlFeature();
+            //SingleInstanceFeature = new SingleInstanceFeature();
+            //AdminFeature = new AdminFeature();
+            //SystrayFeature = new SystrayFeature();
+            //CustomUrlFeature = new CustomUrlFeature();
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFDemo.I18n.Resources;
 using WPFFeatures.Systray;
 
 namespace WPFDemo
@@ -64,6 +65,11 @@ namespace WPFDemo
 
             Application.Current.GetSingleInstanceFeature()?.OnMainWindowLoaded(hwnd.Handle);
             Application.Current.GetSystrayFeature()?.OnMainWindowLoaded();
+
+            //var languageManager = new LanguageManager();
+            //languageManager.Register("Languages");
+            //languageManager.Load("cn");
+            //var hello = languageManager.GetText("hello");
         }
 
         private IntPtr HandleWindowMessages(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

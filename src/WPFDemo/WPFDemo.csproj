@@ -14,7 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IO.Abstractions" Version="21.0.22" />
     <PackageReference Include="TaskScheduler" Version="2.10.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Languages\cn.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Languages\en.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
