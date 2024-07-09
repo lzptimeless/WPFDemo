@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFDemo.I18n.Resources;
 using WPFFeatures.Admin;
 using WPFFeatures.CustomUrl;
 using WPFFeatures.SingleInstance;
@@ -51,6 +52,9 @@ namespace WPFDemo
             }
 
             this.GetCustomUrlFeature()?.TryRegisterUriScheme();
+
+            LanguageManager.Default.Register("Languages");
+            LanguageManager.Default.Load("en", "en");
 
             base.OnStartup(e);
         }

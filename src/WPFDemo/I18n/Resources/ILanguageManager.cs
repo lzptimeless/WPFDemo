@@ -17,6 +17,11 @@ namespace WPFDemo.I18n.Resources
         string? IetfTag { get; }
 
         /// <summary>
+        /// 多语言发生改变时触发，即<see cref="Load"/>函数调用之后触发
+        /// </summary>
+        event EventHandler<LanguageChangedArgs>? LanguageChanged;
+
+        /// <summary>
         /// 注册存放多语言的文件夹，可多次调用，注册多个文件夹
         /// </summary>
         /// <param name="dir">要注册的多语言文件夹</param>

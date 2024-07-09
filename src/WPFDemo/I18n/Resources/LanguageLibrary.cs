@@ -73,7 +73,7 @@ namespace WPFDemo.I18n.Resources
             }
         }
 
-        public string? GetText(string key, TextCases textCase = TextCases.Original, params object[] formatArgs)
+        public string? GetText(string key, TextCases textCase = TextCases.Original, double? count = null, IEnumerable<KeyValuePair<string, string?>>? formatArgs = null)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("key", "key can not be null or empty");
@@ -82,78 +82,13 @@ namespace WPFDemo.I18n.Resources
             if (!_langs.ContainsKey(key))
                 return null;
 
-            string result = _langs[key];
-            if (formatArgs.Length != 0)
-                result = TextHelper.FormatString(result, formatArgs);
-
-            if (textCase != TextCases.Original)
-                result = TextHelper.ApplyTextCase(result, textCase);
+            var result = _langs[key];
+            result = TextHelper.FormatString(result, textCase, count, formatArgs);
 
             return result;
         }
 
-        public string? GetCountText(string key, double count, TextCases textCase = TextCases.Original, params object[] formatArgs)
-        {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("key", "key can not be null or empty");
-
-            key = key.Trim().ToLowerInvariant();
-            if (!_langs.ContainsKey(key))
-                return null;
-
-            string result = _langs[key];
-
-            var finalArgs = formatArgs;
-            if (finalArgs == null)
-            {
-                finalArgs = new object[] { count };
-            }
-            result = TextHelper.FormatCountString(result, count, finalArgs);
-
-            if (textCase != TextCases.Original)
-                result = TextHelper.ApplyTextCase(result, textCase);
-
-            return result;
-        }
-
-        public string? GetText(string key, TextCases textCase = TextCases.Original, Dictionary<string, object>? formatArgs = null)
-        {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("key", "key can not be null or empty");
-
-            key = key.Trim().ToLowerInvariant();
-            if (!_langs.ContainsKey(key))
-                return null;
-
-            string result = _langs[key];
-            if (formatArgs != null)
-                result = TextHelper.FormatString(result, formatArgs);
-
-            if (textCase != TextCases.Original)
-                result = TextHelper.ApplyTextCase(result, textCase);
-
-            return result;
-        }
-
-        public string? GetCountText(string key, double count, TextCases textCase = TextCases.Original, Dictionary<string, object>? formatArgs = null)
-        {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("key", "key can not be null or empty");
-
-            key = key.Trim().ToLowerInvariant();
-            if (!_langs.ContainsKey(key))
-                return null;
-
-            string result = _langs[key];
-            result = TextHelper.FormatCountString(result, count, formatArgs);
-
-            if (textCase != TextCases.Original)
-                result = TextHelper.ApplyTextCase(result, textCase);
-
-            return result;
-        }
-
-        public List<TextPart>? GetTextParts(string key, TextCases textCase = TextCases.Original, Dictionary<string, object>? formatArgs = null)
+        public List<TextPart>? GetTextParts(string key, TextCases textCase = TextCases.Original, double? count = null)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("key", "key can not be null or empty");
@@ -163,40 +98,7 @@ namespace WPFDemo.I18n.Resources
                 return null;
 
             string orginalLang = _langs[key];
-            var parts = TextHelper.FormatStringToParts(orginalLang, formatArgs);
-
-            if (textCase != TextCases.Original)
-            {
-                foreach (var part in parts)
-                {
-                    if (!string.IsNullOrEmpty(part.Content))
-                        part.Content = TextHelper.ApplyTextCase(part.Content, textCase);
-                }
-            }
-
-            return parts;
-        }
-
-        public List<TextPart>? GetCountTextParts(string key, double count, TextCases textCase = TextCases.Original, Dictionary<string, object>? formatArgs = null)
-        {
-            if (string.IsNullOrWhiteSpace(key))
-                throw new ArgumentException("key", "key can not be null or empty");
-
-            key = key.Trim().ToLowerInvariant();
-            if (!_langs.ContainsKey(key))
-                return null;
-
-            string orginalLang = _langs[key];
-            var parts = TextHelper.FormatCountStringToParts(orginalLang, count, formatArgs);
-
-            if (textCase != TextCases.Original)
-            {
-                foreach (var part in parts)
-                {
-                    if (!string.IsNullOrEmpty(part.Content))
-                        part.Content = TextHelper.ApplyTextCase(part.Content, textCase);
-                }
-            }
+            var parts = TextHelper.SplitOriginalString(orginalLang, textCase, count);
 
             return parts;
         }

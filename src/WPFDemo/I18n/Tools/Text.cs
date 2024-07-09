@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using WPFDemo.I18n.Resources;
 
 namespace WPFDemo.I18n.Tools
@@ -29,6 +31,22 @@ namespace WPFDemo.I18n.Tools
 
         private static void KeyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
+            if (!(obj is TextBlock
+                || obj is Run
+                || obj is ContentControl
+                || obj is HeaderedContentControl
+                || obj is Span
+                || obj is Paragraph))
+                throw new NotSupportedException("Text.Key only supports TextBlock, Run, ContentControl, HeaderedContentControl, Span, and Paragraph.");
+
+            var textInstance = GetTextInstance(obj);
+            if (textInstance == null)
+            {
+                textInstance = new TextInstance(obj);
+                SetTextInstance(obj, textInstance);
+            }
+
+            textInstance.Invalid();
         }
         #endregion
 
@@ -51,16 +69,17 @@ namespace WPFDemo.I18n.Tools
 
         private static void CaseChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
+            GetTextInstance(obj)?.Invalid();
         }
         #endregion
 
         #region Count
-        public static double GetCount(DependencyObject obj)
+        public static double? GetCount(DependencyObject obj)
         {
-            return (double)obj.GetValue(CountProperty);
+            return (double?)obj.GetValue(CountProperty);
         }
 
-        public static void SetCount(DependencyObject obj, double value)
+        public static void SetCount(DependencyObject obj, double? value)
         {
             obj.SetValue(CountProperty, value);
         }
@@ -69,10 +88,11 @@ namespace WPFDemo.I18n.Tools
         /// 用于设置复数格式化模式下复数的值，以便决定使用哪一种复数文字
         /// </summary>
         public static readonly DependencyProperty CountProperty =
-            DependencyProperty.RegisterAttached("Count", typeof(double), typeof(Text), new PropertyMetadata(0d, CountChanged));
+            DependencyProperty.RegisterAttached("Count", typeof(double?), typeof(Text), new PropertyMetadata(null, CountChanged));
 
         private static void CountChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
+            GetTextInstance(obj)?.Invalid();
         }
         #endregion
 
@@ -95,6 +115,8 @@ namespace WPFDemo.I18n.Tools
 
         private static void ParamNameChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
+            if (!(obj is Inline))
+                throw new NotSupportedException("Text.ParamName only supports Inline.");
         }
         #endregion
 
@@ -104,18 +126,44 @@ namespace WPFDemo.I18n.Tools
             return (bool)obj.GetValue(I18nGeneratedProperty);
         }
 
-        public static void SetI18nGenerated(DependencyObject obj, bool value)
+        internal static void SetI18nGenerated(DependencyObject obj, bool value)
         {
-            obj.SetValue(I18nGeneratedProperty, value);
+            obj.SetValue(I18nGeneratedPropertyKey, value);
         }
+
+        private static readonly DependencyPropertyKey I18nGeneratedPropertyKey =
+            DependencyProperty.RegisterAttachedReadOnly("I18nGenerated", typeof(bool), typeof(Text), new PropertyMetadata(false, I18nGeneratedChanged));
 
         /// <summary>
         /// 标记某个UI元素是否是I18n自动生成的
         /// </summary>
-        public static readonly DependencyProperty I18nGeneratedProperty =
-            DependencyProperty.RegisterAttached("I18nGenerated", typeof(bool), typeof(Text), new PropertyMetadata(false, I18nGeneratedChanged));
+        public static readonly DependencyProperty I18nGeneratedProperty = I18nGeneratedPropertyKey.DependencyProperty;
 
         private static void I18nGeneratedChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+        }
+        #endregion
+
+        #region TextInstance
+        internal static TextInstance? GetTextInstance(DependencyObject obj)
+        {
+            return (TextInstance)obj.GetValue(TextInstanceProperty);
+        }
+
+        internal static void SetTextInstance(DependencyObject obj, TextInstance? value)
+        {
+            obj.SetValue(TextInstancePropertyKey, value);
+        }
+
+        private static readonly DependencyPropertyKey TextInstancePropertyKey =
+            DependencyProperty.RegisterAttachedReadOnly("TextInstance", typeof(TextInstance), typeof(Text), new PropertyMetadata(null, TextInstancePropertyChanged));
+
+        /// <summary>
+        /// 语言格式化管理对象，负责在合适的时候获取语言格式化结果并设置到其所附加的UI元素
+        /// </summary>
+        internal static readonly DependencyProperty TextInstanceProperty = TextInstancePropertyKey.DependencyProperty;
+
+        private static void TextInstancePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
         }
         #endregion

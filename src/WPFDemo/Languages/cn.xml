@@ -1,4 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <language>
 	<text key="hello">你好！</text>
+	<text key="desc1">这是参数0:{0},还是参数0:{0}</text>
+	<text key="desc2">这是参数0:{0},这是参数1:{1}</text>
+	<text key="hours">零|小时|小时</text>
 </language>
