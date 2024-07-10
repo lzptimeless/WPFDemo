@@ -21,9 +21,9 @@
             <Button x:Name="AddHoursButton" Click="AddHoursButton_Click">增加时间</Button>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <TextBlock i18n:Text.Key="desc2">
-                <Run i18n:Text.ParamName="1" Text="00"/>
-                <Run i18n:Text.ParamName="0" Text="{Binding Hours, Mode=OneWay}"/>
+            <TextBlock i18n:Text.Key="desc1">
+                <Run i18n:Text.ParamName="0" Text="0"/>
+                <Run i18n:Text.ParamName="0" Text="0"/>
             </TextBlock>
         </StackPanel>
     </Grid>
