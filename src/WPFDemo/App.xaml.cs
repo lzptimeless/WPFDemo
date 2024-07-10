@@ -19,6 +19,7 @@ namespace WPFDemo
     public partial class App : Application
     {
         #region properties
+        public new static App Current => (App)Application.Current;
         internal SingleInstanceFeature? SingleInstanceFeature { get; }
         internal AdminFeature? AdminFeature { get; }
         internal SystrayFeature? SystrayFeature { get; }
@@ -35,23 +36,23 @@ namespace WPFDemo
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (this.GetSingleInstanceFeature()?.Register() == false)
+            if (SingleInstanceFeature?.Register() == false)
             {
-                this.GetSingleInstanceFeature()?.Active(e);
+                SingleInstanceFeature?.Active(e);
                 Shutdown();
                 return;
             }
 
-            if (this.GetAdminFeature()?.CheckPrivilege() == false)
+            if (AdminFeature?.CheckPrivilege() == false)
             {
                 // 没有admin权限，尝试重启
-                this.GetSingleInstanceFeature()?.Dispose();
-                this.GetAdminFeature()?.LaunchNewInstanceWithAdmin(e);
+                SingleInstanceFeature?.Dispose();
+                AdminFeature?.LaunchNewInstanceWithAdmin(e);
                 Shutdown();
                 return;
             }
 
-            this.GetCustomUrlFeature()?.TryRegisterUriScheme();
+            CustomUrlFeature?.TryRegisterUriScheme();
 
             LanguageManager.Default.Register("Languages");
             LanguageManager.Default.Load("en", "en");
@@ -61,32 +62,9 @@ namespace WPFDemo
 
         protected override void OnExit(ExitEventArgs e)
         {
-            this.GetSingleInstanceFeature()?.Dispose();
+            SingleInstanceFeature?.Dispose();
 
             base.OnExit(e);
-        }
-    }
-
-    public static class ApplicationExtension
-    {
-        internal static SingleInstanceFeature? GetSingleInstanceFeature(this Application app)
-        {
-            return ((App)app).SingleInstanceFeature;
-        }
-
-        internal static AdminFeature? GetAdminFeature(this Application app)
-        {
-            return ((App)app).AdminFeature;
-        }
-
-        internal static SystrayFeature? GetSystrayFeature(this Application app)
-        {
-            return ((App)app).SystrayFeature;
-        }
-
-        internal static CustomUrlFeature? GetCustomUrlFeature(this Application app)
-        {
-            return ((App)app).CustomUrlFeature;
         }
     }
 }

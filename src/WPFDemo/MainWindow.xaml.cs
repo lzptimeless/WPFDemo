@@ -30,14 +30,14 @@ namespace WPFDemo
         {
             InitializeComponent();
 
-            var systrayFeature = Application.Current.GetSystrayFeature();
+            var systrayFeature = App.Current.SystrayFeature;
             if (systrayFeature != null)
             {
                 systrayFeature.OpenClick += SystrayFeature_OpenClick;
                 systrayFeature.ExitClick += SystrayFeature_ExitClick;
             }
 
-            var singleInstanceFeature = Application.Current.GetSingleInstanceFeature();
+            var singleInstanceFeature = App.Current.SingleInstanceFeature;
             if (singleInstanceFeature != null)
             {
                 singleInstanceFeature.ShowWindow += SingleInstance_ShowWindow;
@@ -67,13 +67,13 @@ namespace WPFDemo
             HwndSource hwnd = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
             hwnd.AddHook(new HwndSourceHook(HandleWindowMessages));
 
-            Application.Current.GetSingleInstanceFeature()?.OnMainWindowLoaded(hwnd.Handle);
-            Application.Current.GetSystrayFeature()?.OnMainWindowLoaded();
+            App.Current.SingleInstanceFeature?.OnMainWindowLoaded(hwnd.Handle);
+            App.Current.SystrayFeature?.OnMainWindowLoaded();
         }
 
         private IntPtr HandleWindowMessages(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            nint? result = Application.Current.GetSingleInstanceFeature()?.HandleWindowMessages(this, hwnd, msg, wParam, lParam, ref handled);
+            nint? result = App.Current.SingleInstanceFeature?.HandleWindowMessages(this, hwnd, msg, wParam, lParam, ref handled);
             if (handled) return result ?? IntPtr.Zero;
 
             return IntPtr.Zero;
@@ -81,7 +81,7 @@ namespace WPFDemo
 
         protected override void OnClosed(EventArgs e)
         {
-            Application.Current.GetSystrayFeature()?.Dispose();
+            App.Current.SystrayFeature?.Dispose();
 
             base.OnClosed(e);
         }
