@@ -10,10 +10,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Shapes;
-using WPFDemo.I18n.Resources;
+using WpfI18n.Events;
+using WpfI18n.Sources;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace WPFDemo.I18n.Tools
+namespace WpfI18n.Tools
 {
     internal class TextInstance
     {

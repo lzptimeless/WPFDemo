@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFDemo.I18n.Resources
+namespace WpfI18n.Sources
 {
     /// <summary>
     /// 语言文本格式化结果的一部分

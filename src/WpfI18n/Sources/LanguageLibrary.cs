@@ -1,4 +1,4 @@
-﻿using WPFDemo.I18n.Exceptions;
+﻿using WpfI18n.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace WPFDemo.I18n.Resources
+namespace WpfI18n.Sources
 {
     /// <summary>
     /// 多语言接口的实现类
@@ -17,23 +17,10 @@ namespace WPFDemo.I18n.Resources
     {
         #region fields
         /// <summary>
-        /// 抽象 IO 接口，方便单元测试
-        /// </summary>
-        private System.IO.Abstractions.IFileSystem _fileSystem;
-        /// <summary>
         /// 多语言数据，key:多语言键,value:多语言值
         /// </summary>
         private Dictionary<string, string> _langs = new Dictionary<string, string>();
         #endregion
-
-        public LanguageLibrary()
-            : this(new System.IO.Abstractions.FileSystem())
-        { }
-
-        public LanguageLibrary(System.IO.Abstractions.IFileSystem fileSys)
-        {
-            _fileSystem = fileSys;
-        }
 
         #region methods
         public void Register(Stream stream)
@@ -67,7 +54,7 @@ namespace WPFDemo.I18n.Resources
             if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentException("path can not be null or empty.");
 
-            using (var s = _fileSystem.File.OpenRead(path))
+            using (var s = File.OpenRead(path))
             {
                 Register(s);
             }

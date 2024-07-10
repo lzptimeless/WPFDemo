@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using WPFDemo.I18n.Resources;
+using WpfI18n.Sources;
 
-namespace WPFDemo.I18n.Tools
+namespace WpfI18n.Tools
 {
     public static class Text
     {

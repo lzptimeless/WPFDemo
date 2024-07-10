@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfI18n.Events;
 
-namespace WPFDemo.I18n.Resources
+namespace WpfI18n.Sources
 {
     /// <summary>
     /// 管理多语言文件夹，便捷加载多语言

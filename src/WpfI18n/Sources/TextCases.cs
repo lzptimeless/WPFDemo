@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFDemo.I18n.Resources
+namespace WpfI18n.Sources
 {
     /// <summary>
     /// 多语言值大小写转换类型

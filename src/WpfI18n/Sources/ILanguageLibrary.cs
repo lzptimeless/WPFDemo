@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace WPFDemo.I18n.Resources
+namespace WpfI18n.Sources
 {
     /// <summary>
     /// 多语言接口，加载多语言文件，获取多语言

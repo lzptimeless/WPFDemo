@@ -6,16 +6,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using WpfI18n.Events;
 
-namespace WPFDemo.I18n.Resources
+namespace WpfI18n.Sources
 {
     public class LanguageManager : ILanguageManager
     {
         #region fields
-        /// <summary>
-        /// 抽象 IO，用于单元测试
-        /// </summary>
-        private System.IO.Abstractions.IFileSystem _fileSys;
         /// <summary>
         /// 实际存储多语言
         /// </summary>
@@ -29,15 +26,6 @@ namespace WPFDemo.I18n.Resources
         /// </summary>
         private static LanguageManager? _default;
         #endregion
-
-        public LanguageManager()
-            : this(new System.IO.Abstractions.FileSystem())
-        { }
-
-        public LanguageManager(System.IO.Abstractions.IFileSystem fileSys)
-        {
-            _fileSys = fileSys;
-        }
 
         #region properties
         /// <summary>
@@ -87,7 +75,7 @@ namespace WPFDemo.I18n.Resources
                 throw new ArgumentException("langIetfTag can not be null or empty", "langIetfTag");
 
             List<string> langFiles = GetFilesByTag(langIetfTag, defaultTag);
-            LanguageLibrary langLibrary = new LanguageLibrary(_fileSys);
+            LanguageLibrary langLibrary = new LanguageLibrary();
             foreach (var langFile in langFiles)
             {
                 langLibrary.Register(langFile);
@@ -132,11 +120,11 @@ namespace WPFDemo.I18n.Resources
             List<string> allDirs = new List<string>();
             foreach (var dir in _dirs)
             {
-                if (_fileSys.Directory.Exists(dir) && !allDirs.Contains(dir))
+                if (Directory.Exists(dir) && !allDirs.Contains(dir))
                 {
                     allDirs.Add(dir);
 
-                    var subDirs = _fileSys.Directory.GetDirectories(dir, "*", SearchOption.AllDirectories);
+                    var subDirs = Directory.GetDirectories(dir, "*", SearchOption.AllDirectories);
                     foreach (var subDir in subDirs)
                     {
                         var lowerSubDir = subDir.ToLowerInvariant();
@@ -176,7 +164,7 @@ namespace WPFDemo.I18n.Resources
         /// <returns>key: 组名，value: 同一个组的多语言文件</returns>
         private Dictionary<string, List<string>> GetFilesWithGroup(string dir)
         {
-            string[] allFiles = _fileSys.Directory.GetFiles(dir, "*.xml", SearchOption.TopDirectoryOnly).Select(f => f.ToLowerInvariant()).ToArray();
+            string[] allFiles = Directory.GetFiles(dir, "*.xml", SearchOption.TopDirectoryOnly).Select(f => f.ToLowerInvariant()).ToArray();
             Dictionary<string, List<string>> groupsTmp = new Dictionary<string, List<string>>();
             Regex groupRegex = new Regex(@"^((?<group>.*)\.)?.+\.xml$");
             string emptyGroupName = Guid.NewGuid().ToString();

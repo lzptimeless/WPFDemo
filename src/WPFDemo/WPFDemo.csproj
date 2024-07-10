@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WpfI18n\WpfI18n.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Languages\cn.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

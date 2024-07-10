@@ -5,11 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using WPFDemo.I18n.Resources;
 using WPFFeatures.Admin;
 using WPFFeatures.CustomUrl;
 using WPFFeatures.SingleInstance;
 using WPFFeatures.Systray;
+using WpfI18n.Sources;
 
 namespace WPFDemo
 {
