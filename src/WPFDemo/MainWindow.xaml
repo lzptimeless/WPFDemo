@@ -22,9 +22,8 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <TextBlock i18n:Text.Key="desc2">
-                <Run i18n:Text.ParamName="0" Text="00"/>
-                <Run i18n:Text.ParamName="0" Text="00"/>
-                <Run i18n:Text.ParamName="1" Text="{Binding Hours, Mode=OneWay}"/>
+                <Run i18n:Text.ParamName="1" Text="00"/>
+                <Run i18n:Text.ParamName="0" Text="{Binding Hours, Mode=OneWay}"/>
             </TextBlock>
         </StackPanel>
     </Grid>

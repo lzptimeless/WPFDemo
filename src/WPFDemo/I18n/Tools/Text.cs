@@ -120,30 +120,6 @@ namespace WPFDemo.I18n.Tools
         }
         #endregion
 
-        #region I18nGenerated
-        public static bool GetI18nGenerated(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(I18nGeneratedProperty);
-        }
-
-        internal static void SetI18nGenerated(DependencyObject obj, bool value)
-        {
-            obj.SetValue(I18nGeneratedPropertyKey, value);
-        }
-
-        private static readonly DependencyPropertyKey I18nGeneratedPropertyKey =
-            DependencyProperty.RegisterAttachedReadOnly("I18nGenerated", typeof(bool), typeof(Text), new PropertyMetadata(false, I18nGeneratedChanged));
-
-        /// <summary>
-        /// 标记某个UI元素是否是I18n自动生成的
-        /// </summary>
-        public static readonly DependencyProperty I18nGeneratedProperty = I18nGeneratedPropertyKey.DependencyProperty;
-
-        private static void I18nGeneratedChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-        }
-        #endregion
-
         #region TextInstance
         internal static TextInstance? GetTextInstance(DependencyObject obj)
         {

@@ -9,7 +9,7 @@ namespace WPFDemo.ViewModels
 {
     internal class MainViewModel : ObservableObject
     {
-        private int _hours;
+        private int _hours = 1;
         public int Hours
         {
             get => _hours;

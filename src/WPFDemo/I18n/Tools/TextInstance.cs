@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -149,7 +150,6 @@ namespace WPFDemo.I18n.Tools
                     {
                         var runInline = new Run();
                         runInline.Text = text;
-                        Text.SetI18nGenerated(runInline, true);
                         inlines.Add(runInline);
                     }
                 }
@@ -161,45 +161,63 @@ namespace WPFDemo.I18n.Tools
             var inlines = GetInlineCollection();
             if (inlines == null) return;
 
-            if (parts == null || parts.Count == 0)
-            {
-                inlines.Clear();
-                return;
-            }
-
             var inlineParams = new TextInlineCollection();
             // 获取语言格式化参数，注意这里是允许多个相同的ParamName的Inline元素同时存在的，这种规则是为了解决以下问题：
             // 语言格式化字符串中可能存在同一个参数被多次引用的情况，而一个Inline元素是无法被多次添加到TextBlock中的。
-            foreach (var inline in inlines)
+            foreach (var inline in inlines.ToArray())
             {
                 var paramName = Text.GetParamName(inline);
                 if (!string.IsNullOrEmpty(paramName))
-                {
                     inlineParams.AddInline(paramName, inline);
-                }
+                else
+                    inlines.Remove(inline); // 移除非格式化参数的元素，这些元素可能是上次SetTextParts生成的。
             }
-            // 清空TextBlock.Inlines
-            inlines.Clear();
-            // 根据语言格式化结果(parts)填充TextBlock.Inlines
-            foreach (var part in parts)
+
+            if (parts == null || parts.Count == 0) return;
+
+            // 根据语言格式化结果(parts)填充TextBlock.Inlines，注意在这个过程中尽量不要动inlines里面已经存在的元素，
+            // 因为可能会影响这些元素的数据绑定导致不可预知的问题。
+            for (int i = 0; i < parts.Count; i++)
             {
-                if (part.IsParameter)
+                var part = parts[i];
+                if (inlines.Count > i)
                 {
-                    if (!string.IsNullOrEmpty(part.ParameterName))
+                    var inlineParam1 = (Inline)((IList)inlines)[i]!;
+                    if (part.IsParameter && !string.IsNullOrEmpty(part.ParameterName))
                     {
-                        var inline = inlineParams.TakeInline(part.ParameterName);
-                        if (inline != null)
+                        var inlineParam2 = inlineParams.TakeInline(part.ParameterName);
+                        if (object.ReferenceEquals(inlineParam1, inlineParam2))
+                            continue;
+                        else if (inlineParam2 != null)
                         {
-                            inlines.Add(inline);
+                            inlines.Remove(inlineParam2); // 必须先从inlines中移除，否则InsertBefore会抛异常。
+                            inlines.InsertBefore(inlineParam1, inlineParam2);
+                            if (inlineParam2 is Run runParam)
+                            {
+                                // 如果Run元素的Text属性的绑定的数据源是DataContext，在经过Remove+InsertBefore
+                                // 之后，即使Text属性不为空也不会被父级TextBlock渲染，需要通过SetCurrentValue+UpdateTarget
+                                // 修复。
+                                var textBinding = runParam.GetBindingExpression(Run.TextProperty);
+                                if (textBinding != null && !string.IsNullOrEmpty(runParam.Text))
+                                {
+                                    runParam.SetCurrentValue(Run.TextProperty, string.Empty);
+                                    textBinding.UpdateTarget();
+                                }
+                            }
                             continue;
                         }
                     }
-                }
 
-                var run = new Run();
-                run.Text = part.Content ?? $"{{{part.ParameterName}}}";
-                Text.SetI18nGenerated(run, true);
-                inlines.Add(run);
+                    var run = new Run();
+                    run.Text = part.Content ?? $"{{{part.ParameterName}}}";
+                    inlines.InsertBefore(inlineParam1, run);
+                }
+                else
+                {
+                    var run = new Run();
+                    run.Text = part.Content ?? $"{{{part.ParameterName}}}";
+                    inlines.Add(run);
+                }
             }
         }
 
