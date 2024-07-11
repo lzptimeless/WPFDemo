@@ -108,7 +108,9 @@ namespace WpfI18n.Tools
         }
 
         /// <summary>
-        /// 语言格式化参数的参数名，用以将某个UI元素标记为语言格式化参数，例如：将Run元素标记为TextBlock的语言格式化参数
+        /// 语言格式化参数的参数名，用以将某个UI元素标记为语言格式化参数，例如：将Run元素标记为TextBlock的语言格式化参数，
+        /// 注意这里是允许多个相同的ParamName的Inline元素同时存在的，这种规则是为了解决语言格式化字符串中可能存在同一个参数
+        /// 被多次引用的情况，而一个Inline元素是无法被多次添加到TextBlock中的。
         /// </summary>
         public static readonly DependencyProperty ParamNameProperty =
             DependencyProperty.RegisterAttached("ParamName", typeof(string), typeof(Text), new PropertyMetadata(null, ParamNameChanged));
