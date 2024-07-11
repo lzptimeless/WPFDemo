@@ -44,7 +44,12 @@ namespace WpfI18n.Tools
 
             try
             {
-                string languageDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FolderPath);
+                string languageDir;
+                if (Path.IsPathRooted(FolderPath))
+                    languageDir = FolderPath;
+                else
+                    languageDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FolderPath);
+
                 if (Directory.Exists(languageDir))
                 {
                     var languageManager = LanguageManager.Default;
@@ -52,7 +57,8 @@ namespace WpfI18n.Tools
                     languageManager.Load(Tag);
 
                     _languageFolderWatcher = new FileSystemWatcher(languageDir, "*.xml");
-                    _languageFolderWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName;
+                    // 注意：NotifyFilter.CreationTime可用于监控文件被其它文件覆盖，这恰好是Visual Studio修改文件的行为
+                    _languageFolderWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.CreationTime;
                     _languageFolderWatcher.IncludeSubdirectories = true;
                     _languageFolderWatcher.Changed += OnLanguageFolderWatcherChanged;
                     _languageFolderWatcher.EnableRaisingEvents = true;
@@ -61,7 +67,12 @@ namespace WpfI18n.Tools
             catch { }
         }
 
-        private async void OnLanguageFolderWatcherChanged(object sender, FileSystemEventArgs e)
+        private void OnLanguageFolderWatcherChanged(object sender, FileSystemEventArgs e)
+        {
+            ReloadLanguage();
+        }
+
+        private async void ReloadLanguage()
         {
             if (Interlocked.CompareExchange(ref _isReloading, 1, 0) != 0) return;
 

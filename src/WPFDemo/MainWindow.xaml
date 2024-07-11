@@ -25,6 +25,7 @@
                 <Run i18n:Text.ParamName="0" Text="0"/>
                 <Run i18n:Text.ParamName="0" Text="0"/>
             </TextBlock>
+            <TextBlock x:Name="Output"/>
         </StackPanel>
     </Grid>
 </Window>

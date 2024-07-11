@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <language>
 	<text key="hello">Hello!</text>
-	<text key="desc1">Param0:{0},Param0:{0},Test6</text>
+	<text key="desc1">Param0:{0},Param0:{0},Test1</text>
 	<text key="desc2">Param0:{0},Param1:{1},Test</text>
 	<text key="hours">zero|hour|hours</text>
 </language>

@@ -5,6 +5,8 @@
              xmlns:i18n="clr-namespace:WpfI18n.Tools;assembly=WpfI18n"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <i18n:DesignerLanguageInitializer x:Key="DesignerLanguageInitializer" FolderPath="Languages" Tag="en"/>
+        <i18n:DesignerLanguageInitializer x:Key="DesignerLanguageInitializer" 
+                                          FolderPath="C:\Home\projects\WPFDemo\src\WPFDemo\Languages" 
+                                          Tag="en"/>
     </Application.Resources>
 </Application>
